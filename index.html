@@ -1,0 +1,347 @@
+<!DOCTYPE html>
+<html lang="mr">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>धन्वंतरी आयुर्वेद मेडिकल कॉलेज - लायब्ररी</title>
+    <link rel="stylesheet" href="style.css">
+    <!-- QR Code Library -->
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/qrcodejs/1.0.0/qrcode.min.js"></script>
+    <!-- xlsx for Excel export -->
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/xlsx/0.18.5/xlsx.full.min.js"></script>
+</head>
+<body>
+
+<!-- ===== HEADER ===== -->
+<header>
+    <div class="header-content">
+        <h1>🏛️ धन्वंतरी आयुर्वेद मेडिकल कॉलेज, उदगीर</h1>
+        <h2>📚 लायब्ररी व्यवस्थापन प्रणाली</h2>
+        <p class="stats" id="headerStats">एकूण पुस्तके: 0 | उपलब्ध: 0 | वितरित: 0</p>
+    </div>
+</header>
+
+<!-- ===== NAVIGATION ===== -->
+<nav>
+    <button class="nav-btn active" onclick="showSection('dashboard')">🏠 डॅशबोर्ड</button>
+    <button class="nav-btn" onclick="showSection('addBook')">📖 पुस्तक नोंदणी</button>
+    <button class="nav-btn" onclick="showSection('searchBook')">🔍 पुस्तक शोधा</button>
+    <button class="nav-btn" onclick="showSection('issueReturn')">🔄 देवाण-घेवाण</button>
+    <button class="nav-btn" onclick="showSection('students')">🎓 विद्यार्थी</button>
+    <button class="nav-btn" onclick="showSection('qrSection')">📱 QR कोड</button>
+    <button class="nav-btn" onclick="showSection('reports')">📊 रिपोर्ट</button>
+    <button class="nav-btn" onclick="showSection('backupSection')">💾 बॅकअप</button>
+</nav>
+
+<!-- ===== DASHBOARD ===== -->
+<section id="dashboard" class="section active">
+    <h2>📊 डॅशबोर्ड</h2>
+    <div class="dashboard-cards">
+        <div class="card blue">
+            <h3>📚 एकूण पुस्तके</h3>
+            <p id="totalBooks">0</p>
+        </div>
+        <div class="card green">
+            <h3>✅ उपलब्ध</h3>
+            <p id="availableBooks">0</p>
+        </div>
+        <div class="card red">
+            <h3>📤 वितरित</h3>
+            <p id="issuedBooks">0</p>
+        </div>
+        <div class="card purple">
+            <h3>🎓 विद्यार्थी</h3>
+            <p id="totalStudents">0</p>
+        </div>
+        <div class="card orange">
+            <h3>⚠️ मुदत संपलेली</h3>
+            <p id="overdueBooks">0</p>
+        </div>
+        <div class="card teal">
+            <h3>📅 आजचे व्यवहार</h3>
+            <p id="todayTransactions">0</p>
+        </div>
+    </div>
+    <h3>📋 अलीकडील व्यवहार</h3>
+    <table id="recentTransactions">
+        <thead>
+            <tr>
+                <th>तारीख/वेळ</th>
+                <th>विद्यार्थी</th>
+                <th>पुस्तक</th>
+                <th>प्रकार</th>
+            </tr>
+        </thead>
+        <tbody></tbody>
+    </table>
+</section>
+
+<!-- ===== ADD BOOK ===== -->
+<section id="addBook" class="section">
+    <h2>📖 नवीन पुस्तक नोंदणी</h2>
+    <form id="addBookForm">
+        <div class="form-grid">
+            <div class="form-group">
+                <label>पुस्तक क्रमांक (Accession No.) *</label>
+                <input type="text" id="bookAccNo" required placeholder="उदा. ACC-00001">
+            </div>
+            <div class="form-group">
+                <label>पुस्तकाचे नाव *</label>
+                <input type="text" id="bookName" required placeholder="पुस्तकाचे नाव लिहा">
+            </div>
+            <div class="form-group">
+                <label>लेखक *</label>
+                <input type="text" id="bookAuthor" required placeholder="लेखकाचे नाव">
+            </div>
+            <div class="form-group">
+                <label>प्रकाशक</label>
+                <input type="text" id="bookPublisher" placeholder="प्रकाशकाचे नाव">
+            </div>
+            <div class="form-group">
+                <label>ISBN</label>
+                <input type="text" id="bookISBN" placeholder="ISBN क्रमांक">
+            </div>
+            <div class="form-group">
+                <label>प्रकाशन वर्ष</label>
+                <input type="number" id="bookYear" placeholder="2024">
+            </div>
+            <div class="form-group">
+                <label>विषय / Category *</label>
+                <select id="bookCategory">
+                    <option value="Ayurveda">आयुर्वेद</option>
+                    <option value="Anatomy">शरीररचना (Anatomy)</option>
+                    <option value="Physiology">शरीरक्रिया (Physiology)</option>
+                    <option value="Pharmacology">औषधशास्त्र (Pharmacology)</option>
+                    <option value="Pathology">विकृतिशास्त्र (Pathology)</option>
+                    <option value="Surgery">शल्यतंत्र (Surgery)</option>
+                    <option value="Medicine">कायचिकित्सा (Medicine)</option>
+                    <option value="Panchakarma">पंचकर्म</option>
+                    <option value="Rasashastra">रसशास्त्र</option>
+                    <option value="Dravyaguna">द्रव्यगुण</option>
+                    <option value="Samhita">संहिता</option>
+                    <option value="General">सामान्य</option>
+                    <option value="Other">इतर</option>
+                </select>
+            </div>
+            <div class="form-group">
+                <label>रॅक/शेल्फ क्रमांक</label>
+                <input type="text" id="bookRack" placeholder="उदा. R1-S3">
+            </div>
+            <div class="form-group">
+                <label>किंमत (₹)</label>
+                <input type="number" id="bookPrice" placeholder="0.00">
+            </div>
+            <div class="form-group">
+                <label>प्रतींची संख्या</label>
+                <input type="number" id="bookCopies" value="1" min="1">
+            </div>
+        </div>
+        <button type="submit" class="btn-primary">✅ पुस्तक नोंदणी करा</button>
+    </form>
+    <br>
+    <h3>📥 Excel/CSV मधून पुस्तके Import करा</h3>
+    <p>15,000 पुस्तके एकदम Import करण्यासाठी Excel फाईल वापरा</p>
+    <input type="file" id="importBooksFile" accept=".xlsx,.xls,.csv">
+    <button onclick="importBooksFromFile()" class="btn-secondary">📥 Import करा</button>
+    <a href="#" onclick="downloadTemplate()" class="btn-secondary">📄 Template डाउनलोड करा</a>
+</section>
+
+<!-- ===== SEARCH BOOK ===== -->
+<section id="searchBook" class="section">
+    <h2>🔍 पुस्तक शोधा</h2>
+    <div class="search-bar">
+        <input type="text" id="searchInput" placeholder="पुस्तकाचे नाव, लेखक, ISBN, किंवा Accession No. ने शोधा..."
+               oninput="searchBooks()">
+        <select id="searchCategory" onchange="searchBooks()">
+            <option value="">सर्व विषय</option>
+            <option value="Ayurveda">आयुर्वेद</option>
+            <option value="Anatomy">शरीररचना</option>
+            <option value="Physiology">शरीरक्रिया</option>
+            <option value="Pharmacology">औषधशास्त्र</option>
+            <option value="Pathology">विकृतिशास्त्र</option>
+            <option value="Surgery">शल्यतंत्र</option>
+            <option value="Medicine">कायचिकित्सा</option>
+            <option value="Panchakarma">पंचकर्म</option>
+            <option value="Rasashastra">रसशास्त्र</option>
+            <option value="Dravyaguna">द्रव्यगुण</option>
+            <option value="Samhita">संहिता</option>
+        </select>
+        <select id="searchStatus" onchange="searchBooks()">
+            <option value="">सर्व स्थिती</option>
+            <option value="available">उपलब्ध</option>
+            <option value="issued">वितरित</option>
+        </select>
+    </div>
+    <div id="searchResults"></div>
+</section>
+
+<!-- ===== ISSUE/RETURN ===== -->
+<section id="issueReturn" class="section">
+    <h2>🔄 पुस्तक देवाण-घेवाण</h2>
+    <div class="tabs">
+        <button class="tab-btn active" onclick="showTab('issueTab', this)">📤 पुस्तक द्या (Issue)</button>
+        <button class="tab-btn" onclick="showTab('returnTab', this)">📥 पुस्तक परत (Return)</button>
+    </div>
+
+    <div id="issueTab" class="tab-content active">
+        <form id="issueForm">
+            <div class="form-grid">
+                <div class="form-group">
+                    <label>पुस्तक Accession No. / QR स्कॅन *</label>
+                    <input type="text" id="issueBookId" required placeholder="Accession No. टाका किंवा QR स्कॅन करा">
+                    <button type="button" onclick="startQRScan('issueBookId')" class="btn-small">📷 QR स्कॅन</button>
+                </div>
+                <div class="form-group">
+                    <label>विद्यार्थी ID / रोल नंबर *</label>
+                    <input type="text" id="issueStudentId" required placeholder="विद्यार्थी ID टाका">
+                </div>
+                <div class="form-group">
+                    <label>परत करण्याची तारीख *</label>
+                    <input type="date" id="issueDueDate" required>
+                </div>
+            </div>
+            <div id="issueBookInfo" class="info-box"></div>
+            <div id="issueStudentInfo" class="info-box"></div>
+            <button type="submit" class="btn-primary">📤 पुस्तक Issue करा</button>
+        </form>
+    </div>
+
+    <div id="returnTab" class="tab-content">
+        <form id="returnForm">
+            <div class="form-group">
+                <label>पुस्तक Accession No. / QR स्कॅन *</label>
+                <input type="text" id="returnBookId" required placeholder="Accession No. टाका किंवा QR स्कॅन करा">
+                <button type="button" onclick="startQRScan('returnBookId')" class="btn-small">📷 QR स्कॅन</button>
+            </div>
+            <div id="returnBookInfo" class="info-box"></div>
+            <button type="submit" class="btn-primary">📥 पुस्तक परत करा</button>
+        </form>
+    </div>
+</section>
+
+<!-- ===== STUDENTS ===== -->
+<section id="students" class="section">
+    <h2>🎓 विद्यार्थी नोंदणी</h2>
+    <form id="addStudentForm">
+        <div class="form-grid">
+            <div class="form-group">
+                <label>रोल नंबर / ID *</label>
+                <input type="text" id="studentId" required>
+            </div>
+            <div class="form-group">
+                <label>विद्यार्थ्याचे नाव *</label>
+                <input type="text" id="studentName" required>
+            </div>
+            <div class="form-group">
+                <label>वर्ग / Year *</label>
+                <select id="studentYear">
+                    <option value="1st BAMS">1st BAMS</option>
+                    <option value="2nd BAMS">2nd BAMS</option>
+                    <option value="3rd BAMS">3rd BAMS</option>
+                    <option value="4th BAMS">Final BAMS</option>
+                    <option value="MD">MD (PG)</option>
+                    <option value="MS">MS (PG)</option>
+                    <option value="Faculty">Faculty</option>
+                </select>
+            </div>
+            <div class="form-group">
+                <label>मोबाइल नंबर</label>
+                <input type="tel" id="studentPhone">
+            </div>
+            <div class="form-group">
+                <label>ईमेल</label>
+                <input type="email" id="studentEmail">
+            </div>
+        </div>
+        <button type="submit" class="btn-primary">✅ विद्यार्थी नोंदणी</button>
+    </form>
+    <br>
+    <input type="text" id="studentSearch" placeholder="विद्यार्थी शोधा..." oninput="searchStudents()">
+    <div id="studentList"></div>
+</section>
+
+<!-- ===== QR CODE ===== -->
+<section id="qrSection" class="section">
+    <h2>📱 QR कोड जनरेट करा</h2>
+    <div class="form-grid">
+        <div class="form-group">
+            <label>पुस्तक Accession No.</label>
+            <input type="text" id="qrBookId" placeholder="ACC-00001">
+            <button onclick="generateSingleQR()" class="btn-primary">📱 QR तयार करा</button>
+        </div>
+        <div class="form-group">
+            <label>बॅच QR (सर्व पुस्तकांसाठी)</label>
+            <button onclick="generateBatchQR()" class="btn-secondary">📱 सर्व QR तयार करा</button>
+            <button onclick="printQRBatch()" class="btn-secondary">🖨️ थर्मल प्रिंट (Batch)</button>
+        </div>
+    </div>
+    <div id="qrOutput" class="qr-grid"></div>
+    <!-- QR Size for Thermal Printer -->
+    <div class="form-group">
+        <label>QR आकार (थर्मल प्रिंटर साठी)</label>
+        <select id="qrSize">
+            <option value="100">Small (100x100) - 58mm प्रिंटर</option>
+            <option value="150" selected>Medium (150x150) - 80mm प्रिंटर</option>
+            <option value="200">Large (200x200)</option>
+        </select>
+    </div>
+</section>
+
+<!-- ===== REPORTS ===== -->
+<section id="reports" class="section">
+    <h2>📊 रिपोर्ट</h2>
+    <div class="form-grid">
+        <button onclick="generateReport('daily')" class="btn-secondary">📅 आजचा रिपोर्ट</button>
+        <button onclick="generateReport('overdue')" class="btn-secondary">⚠️ मुदत संपलेली पुस्तके</button>
+        <button onclick="generateReport('popular')" class="btn-secondary">⭐ लोकप्रिय पुस्तके</button>
+        <button onclick="generateReport('student')" class="btn-secondary">🎓 विद्यार्थी रिपोर्ट</button>
+        <button onclick="exportToExcel()" class="btn-secondary">📥 Excel Export</button>
+    </div>
+    <div id="reportOutput"></div>
+</section>
+
+<!-- ===== BACKUP ===== -->
+<section id="backupSection" class="section">
+    <h2>💾 बॅकअप आणि रिस्टोर</h2>
+    <div class="backup-cards">
+        <div class="card blue">
+            <h3>📥 बॅकअप तयार करा</h3>
+            <p>संपूर्ण डेटाची JSON फाईल डाउनलोड करा</p>
+            <button onclick="createBackup()" class="btn-primary">💾 बॅकअप डाउनलोड</button>
+        </div>
+        <div class="card green">
+            <h3>📤 डेटा रिस्टोर करा</h3>
+            <p>JSON बॅकअप फाईल अपलोड करून डेटा परत आणा</p>
+            <input type="file" id="restoreFile" accept=".json">
+            <button onclick="restoreBackup()" class="btn-primary">📤 रिस्टोर करा</button>
+        </div>
+        <div class="card orange">
+            <h3>☁️ Auto Backup</h3>
+            <p>दररोज स्वयंचलित बॅकअप</p>
+            <label><input type="checkbox" id="autoBackup" onchange="toggleAutoBackup()"> Auto Backup चालू करा</label>
+            <p id="lastBackupTime">शेवटचा बॅकअप: कधीच नाही</p>
+        </div>
+    </div>
+</section>
+
+<!-- ===== QR SCANNER MODAL ===== -->
+<div id="qrScannerModal" class="modal" style="display:none;">
+    <div class="modal-content">
+        <h3>📷 QR कोड स्कॅन करा</h3>
+        <video id="qrVideo" width="300" height="300"></video>
+        <button onclick="closeQRScanner()" class="btn-secondary">❌ बंद करा</button>
+    </div>
+</div>
+
+<!-- ===== NOTIFICATION ===== -->
+<div id="notification" class="notification"></div>
+
+<!-- ===== SCRIPTS ===== -->
+<script src="db.js"></script>
+<script src="qr.js"></script>
+<script src="backup.js"></script>
+<script src="print.js"></script>
+<script src="app.js"></script>
+
+</body>
+</html>
