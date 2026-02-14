@@ -345,3 +345,1777 @@
 
 </body>
 </html>
+/* ===== GLOBAL STYLES ===== */
+* {
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
+}
+
+body {
+    font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+    background: #f0f2f5;
+    color: #333;
+}
+
+/* ===== HEADER ===== */
+header {
+    background: linear-gradient(135deg, #1a5276, #2e86c1);
+    color: white;
+    padding: 20px;
+    text-align: center;
+    box-shadow: 0 4px 15px rgba(0,0,0,0.2);
+}
+
+header h1 {
+    font-size: 1.5em;
+    margin-bottom: 5px;
+}
+
+header h2 {
+    font-size: 1.1em;
+    font-weight: normal;
+    opacity: 0.9;
+}
+
+header .stats {
+    margin-top: 10px;
+    font-size: 0.9em;
+    opacity: 0.8;
+}
+
+/* ===== NAVIGATION ===== */
+nav {
+    background: #2c3e50;
+    padding: 10px;
+    display: flex;
+    flex-wrap: wrap;
+    gap: 5px;
+    justify-content: center;
+    position: sticky;
+    top: 0;
+    z-index: 100;
+}
+
+.nav-btn {
+    background: transparent;
+    color: white;
+    border: 1px solid rgba(255,255,255,0.2);
+    padding: 8px 16px;
+    border-radius: 5px;
+    cursor: pointer;
+    font-size: 0.85em;
+    transition: all 0.3s;
+}
+
+.nav-btn:hover, .nav-btn.active {
+    background: #3498db;
+    border-color: #3498db;
+}
+
+/* ===== SECTIONS ===== */
+.section {
+    display: none;
+    max-width: 1200px;
+    margin: 20px auto;
+    padding: 25px;
+    background: white;
+    border-radius: 10px;
+    box-shadow: 0 2px 10px rgba(0,0,0,0.1);
+}
+
+.section.active {
+    display: block;
+}
+
+.section h2 {
+    color: #1a5276;
+    margin-bottom: 20px;
+    padding-bottom: 10px;
+    border-bottom: 2px solid #3498db;
+}
+
+/* ===== DASHBOARD CARDS ===== */
+.dashboard-cards {
+    display: grid;
+    grid-template-columns: repeat(auto-fit, minmax(180px, 1fr));
+    gap: 15px;
+    margin-bottom: 25px;
+}
+
+.card {
+    padding: 20px;
+    border-radius: 10px;
+    color: white;
+    text-align: center;
+}
+
+.card h3 {
+    font-size: 0.9em;
+    margin-bottom: 10px;
+}
+
+.card p {
+    font-size: 2em;
+    font-weight: bold;
+}
+
+.card.blue { background: linear-gradient(135deg, #2980b9, #3498db); }
+.card.green { background: linear-gradient(135deg, #27ae60, #2ecc71); }
+.card.red { background: linear-gradient(135deg, #c0392b, #e74c3c); }
+.card.purple { background: linear-gradient(135deg, #8e44ad, #9b59b6); }
+.card.orange { background: linear-gradient(135deg, #d35400, #e67e22); }
+.card.teal { background: linear-gradient(135deg, #16a085, #1abc9c); }
+
+/* ===== FORMS ===== */
+.form-grid {
+    display: grid;
+    grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
+    gap: 15px;
+    margin-bottom: 20px;
+}
+
+.form-group {
+    display: flex;
+    flex-direction: column;
+    gap: 5px;
+}
+
+.form-group label {
+    font-weight: 600;
+    color: #555;
+    font-size: 0.9em;
+}
+
+.form-group input, .form-group select {
+    padding: 10px;
+    border: 2px solid #ddd;
+    border-radius: 5px;
+    font-size: 1em;
+    transition: border-color 0.3s;
+}
+
+.form-group input:focus, .form-group select:focus {
+    border-color: #3498db;
+    outline: none;
+}
+
+/* ===== BUTTONS ===== */
+.btn-primary {
+    background: #3498db;
+    color: white;
+    border: none;
+    padding: 12px 25px;
+    border-radius: 5px;
+    cursor: pointer;
+    font-size: 1em;
+    transition: background 0.3s;
+}
+
+.btn-primary:hover { background: #2980b9; }
+
+.btn-secondary {
+    background: #95a5a6;
+    color: white;
+    border: none;
+    padding: 10px 20px;
+    border-radius: 5px;
+    cursor: pointer;
+    font-size: 0.9em;
+    text-decoration: none;
+    display: inline-block;
+    margin: 5px;
+}
+
+.btn-secondary:hover { background: #7f8c8d; }
+
+.btn-small {
+    background: #e67e22;
+    color: white;
+    border: none;
+    padding: 5px 10px;
+    border-radius: 3px;
+    cursor: pointer;
+    font-size: 0.8em;
+    margin-top: 5px;
+}
+
+.btn-danger {
+    background: #e74c3c;
+    color: white;
+    border: none;
+    padding: 8px 15px;
+    border-radius: 5px;
+    cursor: pointer;
+}
+
+/* ===== TABLES ===== */
+table {
+    width: 100%;
+    border-collapse: collapse;
+    margin-top: 15px;
+}
+
+th, td {
+    padding: 10px 12px;
+    text-align: left;
+    border-bottom: 1px solid #eee;
+    font-size: 0.9em;
+}
+
+th {
+    background: #2c3e50;
+    color: white;
+    position: sticky;
+    top: 50px;
+}
+
+tr:hover { background: #f5f5f5; }
+
+/* ===== SEARCH BAR ===== */
+.search-bar {
+    display: flex;
+    gap: 10px;
+    margin-bottom: 20px;
+    flex-wrap: wrap;
+}
+
+.search-bar input {
+    flex: 1;
+    min-width: 250px;
+    padding: 12px;
+    border: 2px solid #ddd;
+    border-radius: 5px;
+    font-size: 1em;
+}
+
+.search-bar select {
+    padding: 10px;
+    border: 2px solid #ddd;
+    border-radius: 5px;
+}
+
+/* ===== TABS ===== */
+.tabs {
+    display: flex;
+    gap: 5px;
+    margin-bottom: 20px;
+}
+
+.tab-btn {
+    padding: 10px 20px;
+    border: 2px solid #ddd;
+    background: #f5f5f5;
+    cursor: pointer;
+    border-radius: 5px 5px 0 0;
+}
+
+.tab-btn.active {
+    background: #3498db;
+    color: white;
+    border-color: #3498db;
+}
+
+.tab-content {
+    display: none;
+}
+
+.tab-content.active {
+    display: block;
+}
+
+/* ===== INFO BOX ===== */
+.info-box {
+    background: #eaf2f8;
+    padding: 15px;
+    border-radius: 5px;
+    margin: 10px 0;
+    border-left: 4px solid #3498db;
+}
+
+/* ===== QR GRID ===== */
+.qr-grid {
+    display: grid;
+    grid-template-columns: repeat(auto-fit, minmax(200px, 1fr));
+    gap: 15px;
+    margin-top: 20px;
+}
+
+.qr-item {
+    text-align: center;
+    padding: 15px;
+    border: 1px solid #ddd;
+    border-radius: 5px;
+}
+
+.qr-item p {
+    margin-top: 8px;
+    font-size: 0.85em;
+    font-weight: bold;
+}
+
+/* ===== NOTIFICATION ===== */
+.notification {
+    position: fixed;
+    top: 20px;
+    right: 20px;
+    padding: 15px 25px;
+    border-radius: 5px;
+    color: white;
+    font-weight: bold;
+    z-index: 1000;
+    display: none;
+    animation: slideIn 0.3s ease;
+}
+
+.notification.success { background: #27ae60; display: block; }
+.notification.error { background: #e74c3c; display: block; }
+.notification.warning { background: #f39c12; display: block; }
+
+@keyframes slideIn {
+    from { transform: translateX(100%); }
+    to { transform: translateX(0); }
+}
+
+/* ===== MODAL ===== */
+.modal {
+    position: fixed;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    background: rgba(0,0,0,0.7);
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    z-index: 1000;
+}
+
+.modal-content {
+    background: white;
+    padding: 30px;
+    border-radius: 10px;
+    text-align: center;
+}
+
+/* ===== BACKUP CARDS ===== */
+.backup-cards {
+    display: grid;
+    grid-template-columns: repeat(auto-fit, minmax(280px, 1fr));
+    gap: 20px;
+}
+
+.backup-cards .card {
+    text-align: left;
+}
+
+.backup-cards .card p {
+    font-size: 0.9em;
+    font-weight: normal;
+    margin-bottom: 15px;
+}
+
+.backup-cards input[type="file"] {
+    margin: 10px 0;
+    color: white;
+}
+
+/* ===== STATUS BADGES ===== */
+.badge {
+    padding: 3px 10px;
+    border-radius: 15px;
+    font-size: 0.8em;
+    font-weight: bold;
+}
+
+.badge-available { background: #d4efdf; color: #27ae60; }
+.badge-issued { background: #fadbd8; color: #e74c3c; }
+.badge-overdue { background: #f9e79f; color: #d35400; }
+
+/* ===== RESPONSIVE ===== */
+@media (max-width: 768px) {
+    header h1 { font-size: 1.1em; }
+    .section { margin: 10px; padding: 15px; }
+    .form-grid { grid-template-columns: 1fr; }
+    .dashboard-cards { grid-template-columns: repeat(2, 1fr); }
+    nav { padding: 5px; }
+    .nav-btn { padding: 6px 10px; font-size: 0.75em; }
+}
+
+/* ===== PRINT STYLES ===== */
+@media print {
+    header, nav, .btn-primary, .btn-secondary, .btn-small { display: none; }
+    .section { box-shadow: none; margin: 0; }
+    .qr-item { break-inside: avoid; }
+}
+// ===== Main Application Logic =====
+// धन्वंतरी आयुर्वेद मेडिकल कॉलेज लायब्ररी
+
+// Initialize App
+document.addEventListener('DOMContentLoaded', async () => {
+    await initDB();
+    updateDashboard();
+    updateLastBackupDisplay();
+
+    // Check auto backup
+    const autoBackup = localStorage.getItem('autoBackupEnabled') === 'true';
+    const checkbox = document.getElementById('autoBackup');
+    if (checkbox) checkbox.checked = autoBackup;
+    if (autoBackup) checkAutoBackup();
+
+    // Set default due date (14 days from now)
+    const dueDate = document.getElementById('issueDueDate');
+    if (dueDate) {
+        const d = new Date();
+        d.setDate(d.getDate() + 14);
+        dueDate.value = d.toISOString().split('T')[0];
+    }
+
+    // Periodic localStorage backup
+    setInterval(localStorageBackup, 300000); // Every 5 min
+});
+
+// ===== NAVIGATION =====
+
+function showSection(sectionId) {
+    document.querySelectorAll('.section').forEach(s => s.classList.remove('active'));
+    document.querySelectorAll('.nav-btn').forEach(b => b.classList.remove('active'));
+    document.getElementById(sectionId).classList.add('active');
+    event.target.classList.add('active');
+
+    if (sectionId === 'dashboard') updateDashboard();
+}
+
+function showTab(tabId, btn) {
+    document.querySelectorAll('.tab-content').forEach(t => t.classList.remove('active'));
+    document.querySelectorAll('.tab-btn').forEach(b => b.classList.remove('active'));
+    document.getElementById(tabId).classList.add('active');
+    btn.classList.add('active');
+}
+
+// ===== NOTIFICATION =====
+
+function showNotification(message, type = 'success') {
+    const notif = document.getElementById('notification');
+    notif.textContent = message;
+    notif.className = `notification ${type}`;
+    setTimeout(() => {
+        notif.className = 'notification';
+    }, 4000);
+}
+
+// ===== DASHBOARD =====
+
+async function updateDashboard() {
+    const counts = await getDashboardCounts();
+
+    document.getElementById('totalBooks').textContent = counts.totalBooks;
+    document.getElementById('availableBooks').textContent = counts.availableBooks;
+    document.getElementById('issuedBooks').textContent = counts.issuedBooks;
+    document.getElementById('totalStudents').textContent = counts.totalStudents;
+    document.getElementById('overdueBooks').textContent = counts.overdueBooks;
+    document.getElementById('todayTransactions').textContent = counts.todayTransactions;
+
+    document.getElementById('headerStats').textContent =
+        `एकूण पुस्तके: ${counts.totalBooks} | उपलब्ध: ${counts.availableBooks} | वितरित: ${counts.issuedBooks}`;
+
+    // Recent Transactions
+    const tbody = document.querySelector('#recentTransactions tbody');
+    tbody.innerHTML = '';
+    counts.recentTransactions.forEach(txn => {
+        const tr = document.createElement('tr');
+        const date = new Date(txn.date);
+        tr.innerHTML = `
+            <td>${date.toLocaleDateString('mr-IN')} ${date.toLocaleTimeString('mr-IN')}</td>
+            <td>${txn.studentName || txn.studentId}</td>
+            <td>${txn.bookName || txn.bookAccNo}</td>
+            <td><span class="badge ${txn.type === 'issue' ? 'badge-issued' : 'badge-available'}">
+                ${txn.type === 'issue' ? '📤 वितरित' : '📥 परत'}
+            </span></td>
+        `;
+        tbody.appendChild(tr);
+    });
+}
+
+// ===== ADD BOOK =====
+
+document.getElementById('addBookForm')?.addEventListener('submit', async (e) => {
+    e.preventDefault();
+
+    const book = {
+        accNo: document.getElementById('bookAccNo').value.trim(),
+        name: document.getElementById('bookName').value.trim(),
+        author: document.getElementById('bookAuthor').value.trim(),
+        publisher: document.getElementById('bookPublisher').value.trim(),
+        isbn: document.getElementById('bookISBN').value.trim(),
+        year: document.getElementById('bookYear').value,
+        category: document.getElementById('bookCategory').value,
+        rack: document.getElementById('bookRack').value.trim(),
+        price: document.getElementById('bookPrice').value,
+        copies: parseInt(document.getElementById('bookCopies').value) || 1
+    };
+
+    try {
+        await addBook(book);
+        showNotification(`✅ "${book.name}" पुस्तक यशस्वीरित्या नोंदणी केले!`, 'success');
+        e.target.reset();
+        updateDashboard();
+    } catch (err) {
+        if (err.name === 'ConstraintError') {
+            showNotification('❌ हा Accession No. आधीच आहे!', 'error');
+        } else {
+            showNotification('❌ नोंदणी अयशस्वी: ' + err.message, 'error');
+        }
+    }
+});
+
+// ===== SEARCH BOOKS =====
+
+async function searchBooks() {
+    const query = document.getElementById('searchInput').value.trim();
+    const category = document.getElementById('searchCategory').value;
+    const status = document.getElementById('searchStatus').value;
+
+    const results = await searchBooksDB(query, category, status);
+    const container = document.getElementById('searchResults');
+
+    if (results.length === 0) {
+        container.innerHTML = '<p>कोणतेही पुस्तक सापडले नाही.</p>';
+        return;
+    }
+
+    let html = `<p>सापडलेली पुस्तके: <strong>${results.length}</strong></p>`;
+    html += `<table><thead><tr>
+        <th>Acc No.</th><th>पुस्तकाचे नाव</th><th>लेखक</th>
+        <th>विषय</th><th>रॅक</th><th>स्थिती</th><th>कृती</th>
+    </tr></thead><tbody>`;
+
+    results.forEach(book => {
+        const statusBadge = book.status === 'available'
+            ? '<span class="badge badge-available">✅ उपलब्ध</span>'
+            : `<span class="badge badge-issued">📤 ${book.issuedTo || 'वितरित'}</span>`;
+
+        html += `<tr>
+            <td>${book.accNo}</td>
+            <td><strong>${book.name}</strong></td>
+            <td>${book.author}</td>
+            <td>${book.category}</td>
+            <td>${book.rack || '-'}</td>
+            <td>${statusBadge}</td>
+            <td>
+                <button class="btn-small" onclick="generateQRForBook('${book.accNo}')">📱 QR</button>
+                <button class="btn-danger" onclick="confirmDeleteBook('${book.accNo}')" style="font-size:0.7em;padding:3px 8px;">🗑️</button>
+            </td>
+        </tr>`;
+    });
+
+    html += '</tbody></table>';
+    container.innerHTML = html;
+}
+
+function generateQRForBook(accNo) {
+    document.getElementById('qrBookId').value = accNo;
+    showSection('qrSection');
+    // Manually trigger navigation styling
+    document.querySelectorAll('.nav-btn').forEach(b => b.classList.remove('active'));
+    generateSingleQR();
+}
+
+function confirmDeleteBook(accNo) {
+    if (confirm(`"${accNo}" पुस्तक कायमचे हटवायचे?`)) {
+        deleteBook(accNo).then(() => {
+            showNotification('पुस्तक हटवले', 'success');
+            searchBooks();
+            updateDashboard();
+        });
+    }
+}
+
+// ===== ISSUE BOOK =====
+
+document.getElementById('issueForm')?.addEventListener('submit', async (e) => {
+    e.preventDefault();
+
+    const bookAccNo = document.getElementById('issueBookId').value.trim();
+    const studentId = document.getElementById('issueStudentId').value.trim();
+    const dueDate = document.getElementById('issueDueDate').value;
+
+    try {
+        const book = await getBook(bookAccNo);
+        if (!book) {
+            showNotification('❌ पुस्तक सापडले नाही', 'error');
+            return;
+        }
+        if (book.status === 'issued') {
+            showNotification('❌ हे पुस्तक आधीच वितरित आहे!', 'error');
+            return;
+        }
+
+        const student = await getStudent(studentId);
+        if (!student) {
+            showNotification('❌ विद्यार्थी सापडला नाही. कृपया आधी नोंदणी करा.', 'error');
+            return;
+        }
+
+        // Update book status
+        book.status = 'issued';
+        book.issuedTo = studentId;
+        book.issuedToName = student.name;
+        book.issueDate = new Date().toISOString();
+        book.dueDate = dueDate;
+        book.issueHistory.push({
+            studentId: studentId,
+            studentName: student.name,
+            issueDate: book.issueDate,
+            dueDate: dueDate
+        });
+        await updateBook(book);
+
+        // Update student
+        if (!student.booksIssued) student.booksIssued = [];
+        student.booksIssued.push(bookAccNo);
+        await updateStudent(student);
+
+        // Add transaction
+        await addTransaction({
+            type: 'issue',
+            bookAccNo: bookAccNo,
+            bookName: book.name,
+            studentId: studentId,
+            studentName: student.name,
+            dueDate: dueDate
+        });
+
+        showNotification(`✅ "${book.name}" → ${student.name} ला वितरित केले!`, 'success');
+        e.target.reset();
+        updateDashboard();
+
+        // Reset due date
+        const d = new Date();
+        d.setDate(d.getDate() + 14);
+        document.getElementById('issueDueDate').value = d.toISOString().split('T')[0];
+
+    } catch (err) {
+        showNotification('❌ Issue अयशस्वी: ' + err.message, 'error');
+    }
+});
+
+// ===== RETURN BOOK =====
+
+document.getElementById('returnForm')?.addEventListener('submit', async (e) => {
+    e.preventDefault();
+
+    const bookAccNo = document.getElementById('returnBookId').value.trim();
+
+    try {
+        const book = await getBook(bookAccNo);
+        if (!book) {
+            showNotification('❌ पुस्तक सापडले नाही', 'error');
+            return;
+        }
+        if (book.status !== 'issued') {
+            showNotification('❌ हे पुस्तक वितरित नाही!', 'error');
+            return;
+        }
+
+        const studentId = book.issuedTo;
+        const studentName = book.issuedToName;
+
+        // Check overdue
+        let overdueMsg = '';
+        if (book.dueDate && new Date(book.dueDate) < new Date()) {
+            const days = Math.floor((new Date() - new Date(book.dueDate)) / (1000*60*60*24));
+            overdueMsg = ` (⚠️ ${days} दिवस उशीर!)`;
+        }
+
+        // Update last history entry with return date
+        if (book.issueHistory.length > 0) {
+            book.issueHistory[book.issueHistory.length - 1].returnDate = new Date().toISOString();
+        }
+
+        // Reset book
+        book.status = 'available';
+        book.issuedTo = null;
+        book.issuedToName = null;
+        book.issueDate = null;
+        book.dueDate = null;
+        await updateBook(book);
+
+        // Update student
+        if (studentId) {
+            const student = await getStudent(studentId);
+            if (student) {
+                student.booksIssued = (student.booksIssued || []).filter(id => id !== bookAccNo);
+                await updateStudent(student);
+            }
+        }
+
+        // Add transaction
+        await addTransaction({
+            type: 'return',
+            bookAccNo: bookAccNo,
+            bookName: book.name,
+            studentId: studentId,
+            studentName: studentName
+        });
+
+        showNotification(`✅ "${book.name}" परत केले! ${overdueMsg}`, 'success');
+        e.target.reset();
+        updateDashboard();
+
+    } catch (err) {
+        showNotification('❌ Return अयशस्वी: ' + err.message, 'error');
+    }
+});
+
+// ===== STUDENTS =====
+
+document.getElementById('addStudentForm')?.addEventListener('submit', async (e) => {
+    e.preventDefault();
+
+    const student = {
+        studentId: document.getElementById('studentId').value.trim(),
+        name: document.getElementById('studentName').value.trim(),
+        year: document.getElementById('studentYear').value,
+        phone: document.getElementById('studentPhone').value.trim(),
+        email: document.getElementById('studentEmail').value.trim()
+    };
+
+    try {
+        await addStudent(student);
+        showNotification(`✅ "${student.name}" विद्यार्थी नोंदणी यशस्वी!`, 'success');
+        e.target.reset();
+        searchStudents();
+        updateDashboard();
+    } catch (err) {
+        if (err.name === 'ConstraintError') {
+            showNotification('❌ हा Student ID आधीच आहे!', 'error');
+        } else {
+            showNotification('❌ नोंदणी अयशस्वी: ' + err.message, 'error');
+        }
+    }
+});
+
+async function searchStudents() {
+    const query = document.getElementById('studentSearch')?.value.trim().toLowerCase() || '';
+    const students = await getAllStudents();
+    const container = document.getElementById('studentList');
+
+    let filtered = students;
+    if (query) {
+        filtered = students.filter(s =>
+            s.name.toLowerCase().includes(query) ||
+            s.studentId.toLowerCase().includes(query) ||
+            s.year.toLowerCase().includes(query)
+        );
+    }
+
+    let html = `<table><thead><tr>
+        <th>ID</th><th>नाव</th><th>वर्ग</th><th>फोन</th><th>पुस्तके</th>
+    </tr></thead><tbody>`;
+
+    filtered.forEach(s => {
+        html += `<tr>
+            <td>${s.studentId}</td>
+            <td>${s.name}</td>
+            <td>${s.year}</td>
+            <td>${s.phone || '-'}</td>
+            <td>${(s.booksIssued || []).length}</td>
+        </tr>`;
+    });
+
+    html += '</tbody></table>';
+    container.innerHTML = html;
+}
+
+// ===== REPORTS =====
+
+async function generateReport(type) {
+    const container = document.getElementById('reportOutput');
+    container.innerHTML = '<p>रिपोर्ट तयार होत आहे...</p>';
+
+    const books = await getAllBooks();
+    const transactions = await getAllTransactions();
+
+    let html = '';
+
+    switch(type) {
+        case 'daily': {
+            const today = new Date().toISOString().split('T')[0];
+            const todayTxns = transactions.filter(t => t.date?.startsWith(today));
+            html = `<h3>📅 आजचा रिपोर्ट (${new Date().toLocaleDateString('mr-IN')})</h3>`;
+            html += `<p>एकूण व्यवहार: ${todayTxns.length}</p>`;
+            html += `<table><thead><tr><th>वेळ</th><th>प्रकार</th><th>पुस्तक</th><th>विद्यार्थी</th></tr></thead><tbody>`;
+            todayTxns.forEach(t => {
+                html += `<tr>
+                    <td>${new Date(t.date).toLocaleTimeString('mr-IN')}</td>
+                    <td>${t.type === 'issue' ? '📤 वितरित' : '📥 परत'}</td>
+                    <td>${t.bookName}</td>
+                    <td>${t.studentName}</td>
+                </tr>`;
+            });
+            html += '</tbody></table>';
+            break;
+        }
+        case 'overdue': {
+            const overdue = books.filter(b =>
+                b.status === 'issued' && b.dueDate && new Date(b.dueDate) < new Date()
+            );
+            html = `<h3>⚠️ मुदत संपलेली पुस्तके (${overdue.length})</h3>`;
+            html += `<table><thead><tr><th>Acc No.</th><th>पुस्तक</th><th>विद्यार्थी</th><th>मुदत</th><th>उशीर (दिवस)</th></tr></thead><tbody>`;
+            overdue.sort((a,b) => new Date(a.dueDate) - new Date(b.dueDate)).forEach(b => {
+                const days = Math.floor((new Date() - new Date(b.dueDate)) / (1000*60*60*24));
+                html += `<tr>
+                    <td>${b.accNo}</td>
+                    <td>${b.name}</td>
+                    <td>${b.issuedToName || b.issuedTo}</td>
+                    <td>${new Date(b.dueDate).toLocaleDateString('mr-IN')}</td>
+                    <td style="color:red;font-weight:bold;">${days} दिवस</td>
+                </tr>`;
+            });
+            html += '</tbody></table>';
+            break;
+        }
+        case 'popular': {
+            const bookCounts = {};
+            transactions.filter(t => t.type === 'issue').forEach(t => {
+                bookCounts[t.bookAccNo] = bookCounts[t.bookAccNo] || { name: t.bookName, count: 0 };
+                bookCounts[t.bookAccNo].count++;
+            });
+            const sorted = Object.entries(bookCounts).sort((a,b) => b[1].count - a[1].count).slice(0, 50);
+            html = `<h3>⭐ सर्वाधिक लोकप्रिय पुस्तके</h3>`;
+            html += `<table><thead><tr><th>#</th><th>Acc No.</th><th>पुस्तक</th><th>वेळा वितरित</th></tr></thead><tbody>`;
+            sorted.forEach(([accNo, data], i) => {
+                html += `<tr><td>${i+1}</td><td>${accNo}</td><td>${data.name}</td><td>${data.count}</td></tr>`;
+            });
+            html += '</tbody></table>';
+            break;
+        }
+        case 'student': {
+            const students = await getAllStudents();
+            html = `<h3>🎓 विद्यार्थी रिपोर्ट</h3>`;
+            html += `<table><thead><tr><th>ID</th><th>नाव</th><th>वर्ग</th><th>सध्या कडे पुस्तके</th></tr></thead><tbody>`;
+            students.filter(s => (s.booksIssued || []).length > 0).forEach(s => {
+                html += `<tr><td>${s.studentId}</td><td>${s.name}</td><td>${s.year}</td><td>${s.booksIssued.length}</td></tr>`;
+            });
+            html += '</tbody></table>';
+            break;
+        }
+    }
+
+    container.innerHTML = html;
+}
+
+// ===== EXCEL EXPORT =====
+
+async function exportToExcel() {
+    const books = await getAllBooks();
+    const wsData = books.map(b => ({
+        'Accession No.': b.accNo,
+        'पुस्तकाचे नाव': b.name,
+        'लेखक': b.author,
+        'प्रकाशक': b.publisher || '',
+        'ISBN': b.isbn || '',
+        'विषय': b.category,
+        'रॅक': b.rack || '',
+        'किंमत': b.price || '',
+        'स्थिती': b.status === 'available' ? 'उपलब्ध' : 'वितरित',
+        'वितरित - विद्यार्थी': b.issuedToName || '',
+        'मुदत': b.dueDate || ''
+    }));
+
+    const ws = XLSX.utils.json_to_sheet(wsData);
+    const wb = XLSX.utils.book_new();
+    XLSX.utils.book_append_sheet(wb, ws, 'पुस्तके');
+    XLSX.writeFile(wb, `DAMC_Library_Books_${new Date().toISOString().split('T')[0]}.xlsx`);
+    showNotification('✅ Excel फाईल डाउनलोड झाली!', 'success');
+}
+
+// ===== IMPORT BOOKS FROM FILE =====
+
+async function importBooksFromFile() {
+    const fileInput = document.getElementById('importBooksFile');
+    const file = fileInput.files[0];
+    if (!file) {
+        showNotification('कृपया फाईल निवडा', 'error');
+        return;
+    }
+
+    try {
+        const data = await file.arrayBuffer();
+        const workbook = XLSX.read(data);
+        const sheet = workbook.Sheets[workbook.SheetNames[0]];
+        const rows = XLSX.utils.sheet_to_json(sheet);
+
+        const books = rows.map(row => ({
+            accNo: String(row['Accession No.'] || row['accNo'] || row['acc_no'] || '').trim(),
+            name: String(row['Book Name'] || row['पुस्तकाचे नाव'] || row['name'] || row['title'] || '').trim(),
+            author: String(row['Author'] || row['लेखक'] || row['author'] || '').trim(),
+            publisher: String(row['Publisher'] || row['प्रकाशक'] || row['publisher'] || '').trim(),
+            isbn: String(row['ISBN'] || row['isbn'] || '').trim(),
+            year: String(row['Year'] || row['year'] || '').trim(),
+            category: String(row['Category'] || row['विषय'] || row['category'] || row['subject'] || 'General').trim(),
+            rack: String(row['Rack'] || row['रॅक'] || row['rack'] || '').trim(),
+            price: String(row['Price'] || row['किंमत'] || row['price'] || '').trim(),
+            copies: parseInt(row['Copies'] || row['copies'] || 1)
+        })).filter(b => b.accNo && b.name);
+
+        if (books.length === 0) {
+            showNotification('❌ फाईलमध्ये योग्य डेटा नाही', 'error');
+            return;
+        }
+
+        const result = await bulkAddBooks(books);
+        showNotification(`✅ ${result.added} पुस्तके Import झाली! (${result.errors} त्रुटी)`, 'success');
+        updateDashboard();
+    } catch (err) {
+        showNotification('❌ Import अयशस्वी: ' + err.message, 'error');
+    }
+}
+
+// ===== DOWNLOAD TEMPLATE =====
+
+function downloadTemplate() {
+    const template = [
+        {
+            'Accession No.': 'ACC-00001',
+            'Book Name': 'Charaka Samhita',
+            'Author': 'Agnivesha',
+            'Publisher': 'Chaukhamba',
+            'ISBN': '978-0000000000',
+            'Year': '2020',
+            'Category': 'Samhita',
+            'Rack': 'R1-S1',
+            'Price': '500',
+            'Copies': 1
+        }
+    ];
+    const ws = XLSX.utils.json_to_sheet(template);
+    const wb = XLSX.utils.book_new();
+    XLSX.utils.book_append_sheet(wb, ws, 'Template');
+    XLSX.writeFile(wb, 'Library_Import_Template.xlsx');
+    showNotification('Template डाउनलोड झाली!', 'success');
+}
+
+// ===== BOOK INFO PREVIEW =====
+
+document.getElementById('issueBookId')?.addEventListener('blur', async function() {
+    const book = await getBook(this.value.trim());
+    const info = document.getElementById('issueBookInfo');
+    if (book) {
+        info.innerHTML = `📚 <strong>${book.name}</strong> | ${book.author} | ${book.category}
+            | स्थिती: ${book.status === 'available' ? '✅ उपलब्ध' : '❌ वितरित'}`;
+    } else {
+        info.innerHTML = '❌ पुस्तक सापडले नाही';
+    }
+});
+
+document.getElementById('issueStudentId')?.addEventListener('blur', async function() {
+    const student = await getStudent(this.value.trim());
+    const info = document.getElementById('issueStudentInfo');
+    if (student) {
+        info.innerHTML = `🎓 <strong>${student.name}</strong> | ${student.year}
+            | सध्या ${(student.booksIssued || []).length} पुस्तके`;
+    } else {
+        info.innerHTML = '❌ विद्यार्थी सापडला नाही';
+    }
+});
+
+document.getElementById('returnBookId')?.addEventListener('blur', async function() {
+    const book = await getBook(this.value.trim());
+    const info = document.getElementById('returnBookInfo');
+    if (book && book.status === 'issued') {
+        const overdue = book.dueDate && new Date(book.dueDate) < new Date();
+        info.innerHTML = `📚 <strong>${book.name}</strong> | ${book.author}<br>
+            📤 वितरित: ${book.issuedToName} | मुदत: ${new Date(book.dueDate).toLocaleDateString('mr-IN')}
+            ${overdue ? '<br><span style="color:red;">⚠️ मुदत संपली आहे!</span>' : ''}`;
+    } else if (book) {
+        info.innerHTML = 'ℹ️ हे पुस्तक वितरित नाही, परत करण्याची गरज नाही.';
+    } else {
+        info.innerHTML = '❌ पुस्तक सापडले नाही';
+    }
+});
+// ===== IndexedDB Database for Library Management =====
+// 15,000+ पुस्तकांसाठी विश्वासार्ह डेटा स्टोरेज
+
+const DB_NAME = 'DhanwantariLibraryDB';
+const DB_VERSION = 1;
+let db;
+
+// Database Initialize
+function initDB() {
+    return new Promise((resolve, reject) => {
+        const request = indexedDB.open(DB_NAME, DB_VERSION);
+
+        request.onupgradeneeded = (event) => {
+            const db = event.target.result;
+
+            // Books Store
+            if (!db.objectStoreNames.contains('books')) {
+                const bookStore = db.createObjectStore('books', { keyPath: 'accNo' });
+                bookStore.createIndex('name', 'name', { unique: false });
+                bookStore.createIndex('author', 'author', { unique: false });
+                bookStore.createIndex('isbn', 'isbn', { unique: false });
+                bookStore.createIndex('category', 'category', { unique: false });
+                bookStore.createIndex('status', 'status', { unique: false });
+            }
+
+            // Students Store
+            if (!db.objectStoreNames.contains('students')) {
+                const studentStore = db.createObjectStore('students', { keyPath: 'studentId' });
+                studentStore.createIndex('name', 'name', { unique: false });
+                studentStore.createIndex('year', 'year', { unique: false });
+            }
+
+            // Transactions Store
+            if (!db.objectStoreNames.contains('transactions')) {
+                const txnStore = db.createObjectStore('transactions', { keyPath: 'txnId', autoIncrement: true });
+                txnStore.createIndex('bookAccNo', 'bookAccNo', { unique: false });
+                txnStore.createIndex('studentId', 'studentId', { unique: false });
+                txnStore.createIndex('type', 'type', { unique: false });
+                txnStore.createIndex('date', 'date', { unique: false });
+            }
+        };
+
+        request.onsuccess = (event) => {
+            db = event.target.result;
+            console.log('✅ Database initialized successfully');
+            resolve(db);
+        };
+
+        request.onerror = (event) => {
+            console.error('❌ Database error:', event.target.error);
+            reject(event.target.error);
+        };
+    });
+}
+
+// ===== BOOK OPERATIONS =====
+
+// Add Book
+function addBook(book) {
+    return new Promise((resolve, reject) => {
+        const txn = db.transaction('books', 'readwrite');
+        const store = txn.objectStore('books');
+        book.status = 'available';
+        book.dateAdded = new Date().toISOString();
+        book.issuedTo = null;
+        book.issueDate = null;
+        book.dueDate = null;
+        book.issueHistory = [];
+        const request = store.add(book);
+        request.onsuccess = () => resolve(book);
+        request.onerror = () => reject(request.error);
+    });
+}
+
+// Get Book
+function getBook(accNo) {
+    return new Promise((resolve, reject) => {
+        const txn = db.transaction('books', 'readonly');
+        const store = txn.objectStore('books');
+        const request = store.get(accNo);
+        request.onsuccess = () => resolve(request.result);
+        request.onerror = () => reject(request.error);
+    });
+}
+
+// Update Book
+function updateBook(book) {
+    return new Promise((resolve, reject) => {
+        const txn = db.transaction('books', 'readwrite');
+        const store = txn.objectStore('books');
+        const request = store.put(book);
+        request.onsuccess = () => resolve(book);
+        request.onerror = () => reject(request.error);
+    });
+}
+
+// Delete Book
+function deleteBook(accNo) {
+    return new Promise((resolve, reject) => {
+        const txn = db.transaction('books', 'readwrite');
+        const store = txn.objectStore('books');
+        const request = store.delete(accNo);
+        request.onsuccess = () => resolve();
+        request.onerror = () => reject(request.error);
+    });
+}
+
+// Get All Books
+function getAllBooks() {
+    return new Promise((resolve, reject) => {
+        const txn = db.transaction('books', 'readonly');
+        const store = txn.objectStore('books');
+        const request = store.getAll();
+        request.onsuccess = () => resolve(request.result);
+        request.onerror = () => reject(request.error);
+    });
+}
+
+// Search Books
+function searchBooksDB(query, category, status) {
+    return new Promise((resolve, reject) => {
+        getAllBooks().then(books => {
+            let results = books;
+
+            if (query) {
+                const q = query.toLowerCase();
+                results = results.filter(b =>
+                    b.name.toLowerCase().includes(q) ||
+                    b.author.toLowerCase().includes(q) ||
+                    b.accNo.toLowerCase().includes(q) ||
+                    (b.isbn && b.isbn.toLowerCase().includes(q)) ||
+                    (b.publisher && b.publisher.toLowerCase().includes(q))
+                );
+            }
+
+            if (category) {
+                results = results.filter(b => b.category === category);
+            }
+
+            if (status) {
+                results = results.filter(b => b.status === status);
+            }
+
+            resolve(results);
+        }).catch(reject);
+    });
+}
+
+// ===== STUDENT OPERATIONS =====
+
+function addStudent(student) {
+    return new Promise((resolve, reject) => {
+        const txn = db.transaction('students', 'readwrite');
+        const store = txn.objectStore('students');
+        student.dateAdded = new Date().toISOString();
+        student.booksIssued = [];
+        const request = store.add(student);
+        request.onsuccess = () => resolve(student);
+        request.onerror = () => reject(request.error);
+    });
+}
+
+function getStudent(studentId) {
+    return new Promise((resolve, reject) => {
+        const txn = db.transaction('students', 'readonly');
+        const store = txn.objectStore('students');
+        const request = store.get(studentId);
+        request.onsuccess = () => resolve(request.result);
+        request.onerror = () => reject(request.error);
+    });
+}
+
+function updateStudent(student) {
+    return new Promise((resolve, reject) => {
+        const txn = db.transaction('students', 'readwrite');
+        const store = txn.objectStore('students');
+        const request = store.put(student);
+        request.onsuccess = () => resolve(student);
+        request.onerror = () => reject(request.error);
+    });
+}
+
+function getAllStudents() {
+    return new Promise((resolve, reject) => {
+        const txn = db.transaction('students', 'readonly');
+        const store = txn.objectStore('students');
+        const request = store.getAll();
+        request.onsuccess = () => resolve(request.result);
+        request.onerror = () => reject(request.error);
+    });
+}
+
+// ===== TRANSACTION OPERATIONS =====
+
+function addTransaction(txnData) {
+    return new Promise((resolve, reject) => {
+        const txn = db.transaction('transactions', 'readwrite');
+        const store = txn.objectStore('transactions');
+        txnData.date = new Date().toISOString();
+        txnData.timestamp = Date.now();
+        const request = store.add(txnData);
+        request.onsuccess = () => resolve(txnData);
+        request.onerror = () => reject(request.error);
+    });
+}
+
+function getAllTransactions() {
+    return new Promise((resolve, reject) => {
+        const txn = db.transaction('transactions', 'readonly');
+        const store = txn.objectStore('transactions');
+        const request = store.getAll();
+        request.onsuccess = () => resolve(request.result);
+        request.onerror = () => reject(request.error);
+    });
+}
+
+// ===== GET COUNTS =====
+
+function getDashboardCounts() {
+    return new Promise(async (resolve) => {
+        const books = await getAllBooks();
+        const students = await getAllStudents();
+        const transactions = await getAllTransactions();
+
+        const today = new Date().toISOString().split('T')[0];
+        const todayTxns = transactions.filter(t =>
+            t.date && t.date.startsWith(today)
+        );
+
+        const overdue = books.filter(b =>
+            b.status === 'issued' && b.dueDate && new Date(b.dueDate) < new Date()
+        );
+
+        resolve({
+            totalBooks: books.length,
+            availableBooks: books.filter(b => b.status === 'available').length,
+            issuedBooks: books.filter(b => b.status === 'issued').length,
+            totalStudents: students.length,
+            overdueBooks: overdue.length,
+            todayTransactions: todayTxns.length,
+            recentTransactions: transactions.sort((a, b) => b.timestamp - a.timestamp).slice(0, 20)
+        });
+    });
+}
+
+// ===== BULK IMPORT =====
+
+function bulkAddBooks(booksArray) {
+    return new Promise((resolve, reject) => {
+        const txn = db.transaction('books', 'readwrite');
+        const store = txn.objectStore('books');
+        let added = 0;
+        let errors = 0;
+
+        booksArray.forEach(book => {
+            book.status = book.status || 'available';
+            book.dateAdded = new Date().toISOString();
+            book.issuedTo = null;
+            book.issueDate = null;
+            book.dueDate = null;
+            book.issueHistory = [];
+            const request = store.put(book); // put = add or update
+            request.onsuccess = () => added++;
+            request.onerror = () => errors++;
+        });
+
+        txn.oncomplete = () => resolve({ added, errors });
+        txn.onerror = () => reject(txn.error);
+    });
+}
+
+// ===== EXPORT ALL DATA =====
+
+async function exportAllData() {
+    const books = await getAllBooks();
+    const students = await getAllStudents();
+    const transactions = await getAllTransactions();
+    return {
+        version: DB_VERSION,
+        exportDate: new Date().toISOString(),
+        college: 'Dhanwantari Ayurved Medical College, Udgir',
+        data: { books, students, transactions }
+    };
+}
+
+// ===== IMPORT ALL DATA =====
+
+function importAllData(data) {
+    return new Promise(async (resolve, reject) => {
+        try {
+            if (data.data.books) await bulkAddBooks(data.data.books);
+
+            if (data.data.students) {
+                const txn = db.transaction('students', 'readwrite');
+                const store = txn.objectStore('students');
+                data.data.students.forEach(s => store.put(s));
+            }
+
+            if (data.data.transactions) {
+                const txn = db.transaction('transactions', 'readwrite');
+                const store = txn.objectStore('transactions');
+                data.data.transactions.forEach(t => store.put(t));
+            }
+
+            resolve(true);
+        } catch (err) {
+            reject(err);
+        }
+    });
+}
+// ===== QR Code Generation for Library Books =====
+// थर्मल प्रिंटर सपोर्ट सह
+
+// Generate Single QR Code
+function generateSingleQR() {
+    const bookId = document.getElementById('qrBookId').value.trim();
+    if (!bookId) {
+        showNotification('कृपया Accession No. टाका', 'error');
+        return;
+    }
+
+    getBook(bookId).then(book => {
+        if (!book) {
+            showNotification('पुस्तक सापडले नाही', 'error');
+            return;
+        }
+
+        const qrOutput = document.getElementById('qrOutput');
+        qrOutput.innerHTML = '';
+
+        const qrItem = createQRElement(book);
+        qrOutput.appendChild(qrItem);
+    });
+}
+
+// Generate Batch QR Codes
+async function generateBatchQR() {
+    const books = await getAllBooks();
+    const qrOutput = document.getElementById('qrOutput');
+    qrOutput.innerHTML = '<p>QR कोड तयार होत आहेत... कृपया थांबा.</p>';
+
+    setTimeout(() => {
+        qrOutput.innerHTML = '';
+        // Process in batches of 50 for performance
+        const batchSize = 50;
+        let index = 0;
+
+        function processBatch() {
+            const batch = books.slice(index, index + batchSize);
+            batch.forEach(book => {
+                const qrItem = createQRElement(book);
+                qrOutput.appendChild(qrItem);
+            });
+            index += batchSize;
+            if (index < books.length) {
+                setTimeout(processBatch, 100);
+            } else {
+                showNotification(`${books.length} QR कोड तयार झाले!`, 'success');
+            }
+        }
+        processBatch();
+    }, 100);
+}
+
+// Create QR Element
+function createQRElement(book) {
+    const size = parseInt(document.getElementById('qrSize')?.value || 150);
+    const qrItem = document.createElement('div');
+    qrItem.className = 'qr-item';
+    qrItem.id = 'qr-' + book.accNo;
+
+    const qrDiv = document.createElement('div');
+    qrDiv.id = 'qrcode-' + book.accNo;
+
+    // QR Data contains: AccNo | BookName | Author
+    const qrData = JSON.stringify({
+        id: book.accNo,
+        name: book.name,
+        author: book.author,
+        lib: 'DAMC-Udgir'
+    });
+
+    qrItem.appendChild(qrDiv);
+
+    const label = document.createElement('p');
+    label.textContent = `${book.accNo} - ${book.name.substring(0, 30)}`;
+    qrItem.appendChild(label);
+
+    const authorLabel = document.createElement('small');
+    authorLabel.textContent = book.author;
+    authorLabel.style.color = '#777';
+    qrItem.appendChild(authorLabel);
+
+    // Print button for individual QR
+    const printBtn = document.createElement('button');
+    printBtn.textContent = '🖨️ प्रिंट';
+    printBtn.className = 'btn-small';
+    printBtn.onclick = () => printSingleQR(book.accNo);
+    qrItem.appendChild(printBtn);
+
+    // Generate QR after DOM append
+    setTimeout(() => {
+        try {
+            new QRCode(qrDiv, {
+                text: qrData,
+                width: size,
+                height: size,
+                colorDark: '#000000',
+                colorLight: '#ffffff',
+                correctLevel: QRCode.CorrectLevel.M
+            });
+        } catch(e) {
+            console.error('QR generation error for', book.accNo, e);
+        }
+    }, 50);
+
+    return qrItem;
+}
+
+// QR Scanner using Camera
+let scannerStream = null;
+let scanTargetInput = null;
+
+function startQRScan(targetInputId) {
+    scanTargetInput = targetInputId;
+    const modal = document.getElementById('qrScannerModal');
+    const video = document.getElementById('qrVideo');
+    modal.style.display = 'flex';
+
+    navigator.mediaDevices.getUserMedia({
+        video: { facingMode: 'environment' }
+    }).then(stream => {
+        scannerStream = stream;
+        video.srcObject = stream;
+        video.play();
+        scanQRFromVideo(video);
+    }).catch(err => {
+        showNotification('कॅमेरा उपलब्ध नाही. कृपया Accession No. मॅन्युअली टाका.', 'warning');
+        closeQRScanner();
+    });
+}
+
+function scanQRFromVideo(video) {
+    // Use canvas to capture frames
+    const canvas = document.createElement('canvas');
+    const ctx = canvas.getContext('2d');
+
+    function scan() {
+        if (!scannerStream) return;
+        canvas.width = video.videoWidth;
+        canvas.height = video.videoHeight;
+        ctx.drawImage(video, 0, 0);
+
+        try {
+            // Try using BarcodeDetector API (modern browsers)
+            if ('BarcodeDetector' in window) {
+                const detector = new BarcodeDetector({ formats: ['qr_code'] });
+                detector.detect(canvas).then(barcodes => {
+                    if (barcodes.length > 0) {
+                        const data = JSON.parse(barcodes[0].rawValue);
+                        document.getElementById(scanTargetInput).value = data.id;
+                        showNotification(`स्कॅन यशस्वी: ${data.id}`, 'success');
+                        closeQRScanner();
+                        return;
+                    }
+                    requestAnimationFrame(scan);
+                }).catch(() => requestAnimationFrame(scan));
+            } else {
+                // Fallback: manual entry
+                showNotification('QR Scanner या ब्राउझरमध्ये उपलब्ध नाही. कृपया मॅन्युअली टाका.', 'warning');
+                closeQRScanner();
+            }
+        } catch(e) {
+            requestAnimationFrame(scan);
+        }
+    }
+    scan();
+}
+
+function closeQRScanner() {
+    if (scannerStream) {
+        scannerStream.getTracks().forEach(track => track.stop());
+        scannerStream = null;
+    }
+    document.getElementById('qrScannerModal').style.display = 'none';
+}
+// ===== Backup & Restore System =====
+// JSON बॅकअप - विश्वासार्ह आणि कायमस्वरूपी
+
+// Create Full Backup
+async function createBackup() {
+    try {
+        const data = await exportAllData();
+
+        const blob = new Blob([JSON.stringify(data, null, 2)], {
+            type: 'application/json'
+        });
+
+        const date = new Date().toISOString().split('T')[0];
+        const time = new Date().toLocaleTimeString('en-IN', {hour12: false}).replace(/:/g, '-');
+        const filename = `DAMC_Library_Backup_${date}_${time}.json`;
+
+        const url = URL.createObjectURL(blob);
+        const a = document.createElement('a');
+        a.href = url;
+        a.download = filename;
+        a.click();
+        URL.revokeObjectURL(url);
+
+        // Update last backup time
+        localStorage.setItem('lastBackupTime', new Date().toISOString());
+        updateLastBackupDisplay();
+
+        showNotification(`✅ बॅकअप यशस्वी! फाईल: ${filename}`, 'success');
+    } catch (err) {
+        showNotification('❌ बॅकअप अयशस्वी: ' + err.message, 'error');
+    }
+}
+
+// Restore from Backup
+async function restoreBackup() {
+    const fileInput = document.getElementById('restoreFile');
+    const file = fileInput.files[0];
+
+    if (!file) {
+        showNotification('कृपया बॅकअप फाईल निवडा', 'error');
+        return;
+    }
+
+    if (!confirm('⚠️ रिस्टोर केल्यावर सध्याचा डेटा बदलला जाईल. पुढे जायचे?')) {
+        return;
+    }
+
+    try {
+        const text = await file.text();
+        const data = JSON.parse(text);
+
+        // Validate backup file
+        if (!data.data || !data.data.books) {
+            throw new Error('अमान्य बॅकअप फाईल');
+        }
+
+        await importAllData(data);
+
+        showNotification(`✅ रिस्टोर यशस्वी! ${data.data.books.length} पुस्तके, ${data.data.students?.length || 0} विद्यार्थी`, 'success');
+
+        // Refresh dashboard
+        updateDashboard();
+    } catch (err) {
+        showNotification('❌ रिस्टोर अयशस्वी: ' + err.message, 'error');
+    }
+}
+
+// Auto Backup
+function toggleAutoBackup() {
+    const enabled = document.getElementById('autoBackup').checked;
+    localStorage.setItem('autoBackupEnabled', enabled);
+
+    if (enabled) {
+        showNotification('Auto Backup चालू केला. दररोज बॅकअप तयार होईल.', 'success');
+        checkAutoBackup();
+    } else {
+        showNotification('Auto Backup बंद केला.', 'warning');
+    }
+}
+
+function checkAutoBackup() {
+    const enabled = localStorage.getItem('autoBackupEnabled') === 'true';
+    if (!enabled) return;
+
+    const lastBackup = localStorage.getItem('lastBackupTime');
+    const today = new Date().toISOString().split('T')[0];
+
+    if (!lastBackup || !lastBackup.startsWith(today)) {
+        // Auto backup today
+        createBackup();
+    }
+}
+
+function updateLastBackupDisplay() {
+    const lastBackup = localStorage.getItem('lastBackupTime');
+    const el = document.getElementById('lastBackupTime');
+    if (el) {
+        if (lastBackup) {
+            const d = new Date(lastBackup);
+            el.textContent = `शेवटचा बॅकअप: ${d.toLocaleDateString('mr-IN')} ${d.toLocaleTimeString('mr-IN')}`;
+        } else {
+            el.textContent = 'शेवटचा बॅकअप: कधीच नाही';
+        }
+    }
+}
+
+// Duplicate backup to localStorage as safety net
+async function localStorageBackup() {
+    try {
+        const data = await exportAllData();
+        // Only store summary in localStorage (size limit ~5MB)
+        const summary = {
+            lastUpdate: new Date().toISOString(),
+            bookCount: data.data.books.length,
+            studentCount: data.data.students.length,
+            txnCount: data.data.transactions.length
+        };
+        localStorage.setItem('libraryDataSummary', JSON.stringify(summary));
+    } catch(e) {
+        console.error('localStorage backup error:', e);
+    }
+}
+// ===== QR Code Generation for Library Books =====
+// थर्मल प्रिंटर सपोर्ट सह
+
+// Generate Single QR Code
+function generateSingleQR() {
+    const bookId = document.getElementById('qrBookId').value.trim();
+    if (!bookId) {
+        showNotification('कृपया Accession No. टाका', 'error');
+        return;
+    }
+
+    getBook(bookId).then(book => {
+        if (!book) {
+            showNotification('पुस्तक सापडले नाही', 'error');
+            return;
+        }
+
+        const qrOutput = document.getElementById('qrOutput');
+        qrOutput.innerHTML = '';
+
+        const qrItem = createQRElement(book);
+        qrOutput.appendChild(qrItem);
+    });
+}
+
+// Generate Batch QR Codes
+async function generateBatchQR() {
+    const books = await getAllBooks();
+    const qrOutput = document.getElementById('qrOutput');
+    qrOutput.innerHTML = '<p>QR कोड तयार होत आहेत... कृपया थांबा.</p>';
+
+    setTimeout(() => {
+        qrOutput.innerHTML = '';
+        // Process in batches of 50 for performance
+        const batchSize = 50;
+        let index = 0;
+
+        function processBatch() {
+            const batch = books.slice(index, index + batchSize);
+            batch.forEach(book => {
+                const qrItem = createQRElement(book);
+                qrOutput.appendChild(qrItem);
+            });
+            index += batchSize;
+            if (index < books.length) {
+                setTimeout(processBatch, 100);
+            } else {
+                showNotification(`${books.length} QR कोड तयार झाले!`, 'success');
+            }
+        }
+        processBatch();
+    }, 100);
+}
+
+// Create QR Element
+function createQRElement(book) {
+    const size = parseInt(document.getElementById('qrSize')?.value || 150);
+    const qrItem = document.createElement('div');
+    qrItem.className = 'qr-item';
+    qrItem.id = 'qr-' + book.accNo;
+
+    const qrDiv = document.createElement('div');
+    qrDiv.id = 'qrcode-' + book.accNo;
+
+    // QR Data contains: AccNo | BookName | Author
+    const qrData = JSON.stringify({
+        id: book.accNo,
+        name: book.name,
+        author: book.author,
+        lib: 'DAMC-Udgir'
+    });
+
+    qrItem.appendChild(qrDiv);
+
+    const label = document.createElement('p');
+    label.textContent = `${book.accNo} - ${book.name.substring(0, 30)}`;
+    qrItem.appendChild(label);
+
+    const authorLabel = document.createElement('small');
+    authorLabel.textContent = book.author;
+    authorLabel.style.color = '#777';
+    qrItem.appendChild(authorLabel);
+
+    // Print button for individual QR
+    const printBtn = document.createElement('button');
+    printBtn.textContent = '🖨️ प्रिंट';
+    printBtn.className = 'btn-small';
+    printBtn.onclick = () => printSingleQR(book.accNo);
+    qrItem.appendChild(printBtn);
+
+    // Generate QR after DOM append
+    setTimeout(() => {
+        try {
+            new QRCode(qrDiv, {
+                text: qrData,
+                width: size,
+                height: size,
+                colorDark: '#000000',
+                colorLight: '#ffffff',
+                correctLevel: QRCode.CorrectLevel.M
+            });
+        } catch(e) {
+            console.error('QR generation error for', book.accNo, e);
+        }
+    }, 50);
+
+    return qrItem;
+}
+
+// QR Scanner using Camera
+let scannerStream = null;
+let scanTargetInput = null;
+
+function startQRScan(targetInputId) {
+    scanTargetInput = targetInputId;
+    const modal = document.getElementById('qrScannerModal');
+    const video = document.getElementById('qrVideo');
+    modal.style.display = 'flex';
+
+    navigator.mediaDevices.getUserMedia({
+        video: { facingMode: 'environment' }
+    }).then(stream => {
+        scannerStream = stream;
+        video.srcObject = stream;
+        video.play();
+        scanQRFromVideo(video);
+    }).catch(err => {
+        showNotification('कॅमेरा उपलब्ध नाही. कृपया Accession No. मॅन्युअली टाका.', 'warning');
+        closeQRScanner();
+    });
+}
+
+function scanQRFromVideo(video) {
+    // Use canvas to capture frames
+    const canvas = document.createElement('canvas');
+    const ctx = canvas.getContext('2d');
+
+    function scan() {
+        if (!scannerStream) return;
+        canvas.width = video.videoWidth;
+        canvas.height = video.videoHeight;
+        ctx.drawImage(video, 0, 0);
+
+        try {
+            // Try using BarcodeDetector API (modern browsers)
+            if ('BarcodeDetector' in window) {
+                const detector = new BarcodeDetector({ formats: ['qr_code'] });
+                detector.detect(canvas).then(barcodes => {
+                    if (barcodes.length > 0) {
+                        const data = JSON.parse(barcodes[0].rawValue);
+                        document.getElementById(scanTargetInput).value = data.id;
+                        showNotification(`स्कॅन यशस्वी: ${data.id}`, 'success');
+                        closeQRScanner();
+                        return;
+                    }
+                    requestAnimationFrame(scan);
+                }).catch(() => requestAnimationFrame(scan));
+            } else {
+                // Fallback: manual entry
+                showNotification('QR Scanner या ब्राउझरमध्ये उपलब्ध नाही. कृपया मॅन्युअली टाका.', 'warning');
+                closeQRScanner();
+            }
+        } catch(e) {
+            requestAnimationFrame(scan);
+        }
+    }
+    scan();
+}
+
+function closeQRScanner() {
+    if (scannerStream) {
+        scannerStream.getTracks().forEach(track => track.stop());
+        scannerStream = null;
+    }
+    document.getElementById('qrScannerModal').style.display = 'none';
+}
