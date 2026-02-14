@@ -3,104 +3,245 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>धन्वंतरी आयुर्वेद मेडिकल कॉलेज - लायब्ररी</title>
+    <title>धन्वंतरी आयुर्वेद मेडिकल कॉलेज - लायब्ररी व्यवस्थापन</title>
     <link rel="stylesheet" href="style.css">
+    <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@300;400;500;600;700;800&display=swap" rel="stylesheet">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.1/css/all.min.css">
     <script src="https://cdnjs.cloudflare.com/ajax/libs/qrcodejs/1.0.0/qrcode.min.js"></script>
     <script src="https://cdnjs.cloudflare.com/ajax/libs/xlsx/0.18.5/xlsx.full.min.js"></script>
 </head>
 <body>
 
-<header>
-    <div class="header-content">
-        <h1>🏛️ धन्वंतरी आयुर्वेद मेडिकल कॉलेज, उदगीर</h1>
-        <h2>📚 लायब्ररी व्यवस्थापन प्रणाली</h2>
-        <p class="stats" id="headerStats">एकूण पुस्तके: 0 | उपलब्ध: 0 | वितरित: 0</p>
+<!-- LOGIN SCREEN -->
+<div id="loginScreen" class="login-screen">
+    <div class="login-box">
+        <div class="login-logo">
+            <div id="loginLogoPreview" class="logo-circle">
+                <i class="fas fa-university"></i>
+            </div>
+            <h1>धन्वंतरी आयुर्वेद मेडिकल कॉलेज</h1>
+            <h2>उदगीर, जि. लातूर</h2>
+            <p class="login-subtitle">📚 लायब्ररी व्यवस्थापन प्रणाली</p>
+        </div>
+        <form id="loginForm">
+            <div class="login-field">
+                <i class="fas fa-user"></i>
+                <input type="text" id="loginUsername" placeholder="Admin Username" required>
+            </div>
+            <div class="login-field">
+                <i class="fas fa-lock"></i>
+                <input type="password" id="loginPassword" placeholder="Password" required>
+            </div>
+            <button type="submit" class="login-btn">
+                <i class="fas fa-sign-in-alt"></i> लॉगिन करा
+            </button>
+            <p class="login-hint" id="loginError"></p>
+        </form>
+        <div class="login-footer">
+            Designed & Developed by Dr. Jadhav V.R. (9518356305)
+        </div>
     </div>
-</header>
+</div>
 
-<nav>
-    <button class="nav-btn active" onclick="showSection('dashboard', this)">🏠 डॅशबोर्ड</button>
-    <button class="nav-btn" onclick="showSection('addBook', this)">📖 पुस्तक नोंदणी</button>
-    <button class="nav-btn" onclick="showSection('searchBook', this)">🔍 पुस्तक शोधा</button>
-    <button class="nav-btn" onclick="showSection('issueReturn', this)">🔄 देवाण-घेवाण</button>
-    <button class="nav-btn" onclick="showSection('students', this)">🎓 विद्यार्थी</button>
-    <button class="nav-btn" onclick="showSection('qrSection', this)">📱 QR कोड</button>
-    <button class="nav-btn" onclick="showSection('reports', this)">📊 रिपोर्ट</button>
-    <button class="nav-btn" onclick="showSection('backupSection', this)">💾 बॅकअप</button>
+<!-- MAIN APP -->
+<div id="mainApp" class="main-app" style="display:none;">
+
+<!-- TOP BAR -->
+<div class="topbar">
+    <div class="topbar-left">
+        <div id="collegeLogo" class="topbar-logo">
+            <i class="fas fa-university"></i>
+        </div>
+        <div class="topbar-title">
+            <h1>धन्वंतरी आयुर्वेद मेडिकल कॉलेज, उदगीर</h1>
+            <p>📚 लायब्ररी व्यवस्थापन प्रणाली</p>
+        </div>
+    </div>
+    <div class="topbar-right">
+        <div class="live-datetime" id="liveDateTime"></div>
+        <button class="topbar-btn" onclick="showSection('notifications', this)" title="सूचना">
+            <i class="fas fa-bell"></i>
+            <span class="notif-badge" id="notifBadge">0</span>
+        </button>
+        <button class="topbar-btn" onclick="showSection('settings', this)" title="सेटिंग्ज">
+            <i class="fas fa-cog"></i>
+        </button>
+        <button class="topbar-btn logout-btn" onclick="logout()" title="लॉगआउट">
+            <i class="fas fa-sign-out-alt"></i>
+        </button>
+    </div>
+</div>
+
+<!-- LIVE TICKER -->
+<div class="ticker-bar">
+    <div class="ticker-content" id="tickerContent">
+        📢 धन्वंतरी आयुर्वेद मेडिकल कॉलेज लायब्ररी मध्ये आपले स्वागत आहे! | 📚 नवीन पुस्तके उपलब्ध | ⏰ लायब्ररी वेळ: सकाळी 8:00 ते संध्याकाळी 6:00 | 📞 संपर्क: 9518356305
+    </div>
+</div>
+
+<!-- NAVIGATION -->
+<nav class="sidebar" id="sidebar">
+    <button class="nav-btn active" onclick="showSection('dashboard', this)">
+        <i class="fas fa-tachometer-alt"></i><span>डॅशबोर्ड</span>
+    </button>
+    <button class="nav-btn" onclick="showSection('addBook', this)">
+        <i class="fas fa-book-medical"></i><span>पुस्तक नोंदणी</span>
+    </button>
+    <button class="nav-btn" onclick="showSection('searchBook', this)">
+        <i class="fas fa-search"></i><span>पुस्तक शोधा</span>
+    </button>
+    <button class="nav-btn" onclick="showSection('issueReturn', this)">
+        <i class="fas fa-exchange-alt"></i><span>देवाण-घेवाण</span>
+    </button>
+    <button class="nav-btn" onclick="showSection('students', this)">
+        <i class="fas fa-user-graduate"></i><span>विद्यार्थी</span>
+    </button>
+    <button class="nav-btn" onclick="showSection('messaging', this)">
+        <i class="fas fa-envelope"></i><span>संदेश/MSG</span>
+    </button>
+    <button class="nav-btn" onclick="showSection('fileShare', this)">
+        <i class="fas fa-share-alt"></i><span>फाईल शेअर</span>
+    </button>
+    <button class="nav-btn" onclick="showSection('notifications', this)">
+        <i class="fas fa-bell"></i><span>सूचना/नोटीस</span>
+    </button>
+    <button class="nav-btn" onclick="showSection('qrSection', this)">
+        <i class="fas fa-qrcode"></i><span>QR कोड</span>
+    </button>
+    <button class="nav-btn" onclick="showSection('reports', this)">
+        <i class="fas fa-chart-bar"></i><span>रिपोर्ट</span>
+    </button>
+    <button class="nav-btn" onclick="showSection('database', this)">
+        <i class="fas fa-database"></i><span>डेटाबेस</span>
+    </button>
+    <button class="nav-btn" onclick="showSection('backupSection', this)">
+        <i class="fas fa-cloud-download-alt"></i><span>बॅकअप</span>
+    </button>
+    <button class="nav-btn" onclick="showSection('settings', this)">
+        <i class="fas fa-cog"></i><span>सेटिंग्ज</span>
+    </button>
 </nav>
 
+<!-- MAIN CONTENT -->
+<main class="content">
+
+<!-- ===== DASHBOARD ===== -->
 <section id="dashboard" class="section active">
-    <h2>📊 डॅशबोर्ड</h2>
+    <div class="section-header">
+        <h2><i class="fas fa-tachometer-alt"></i> डॅशबोर्ड</h2>
+        <span class="section-date" id="dashDate"></span>
+    </div>
+
     <div class="dashboard-cards">
-        <div class="card blue">
-            <h3>📚 एकूण पुस्तके</h3>
-            <p id="totalBooks">0</p>
+        <div class="dash-card card-blue" onclick="showSection('searchBook')">
+            <div class="dash-card-icon"><i class="fas fa-books"></i></div>
+            <div class="dash-card-info">
+                <h3 id="totalBooks">0</h3>
+                <p>एकूण पुस्तके</p>
+            </div>
         </div>
-        <div class="card green">
-            <h3>✅ उपलब्ध</h3>
-            <p id="availableBooks">0</p>
+        <div class="dash-card card-green">
+            <div class="dash-card-icon"><i class="fas fa-check-circle"></i></div>
+            <div class="dash-card-info">
+                <h3 id="availableBooks">0</h3>
+                <p>उपलब्ध</p>
+            </div>
         </div>
-        <div class="card red">
-            <h3>📤 वितरित</h3>
-            <p id="issuedBooks">0</p>
+        <div class="dash-card card-red">
+            <div class="dash-card-icon"><i class="fas fa-arrow-circle-up"></i></div>
+            <div class="dash-card-info">
+                <h3 id="issuedBooks">0</h3>
+                <p>वितरित</p>
+            </div>
         </div>
-        <div class="card purple">
-            <h3>🎓 विद्यार्थी</h3>
-            <p id="totalStudents">0</p>
+        <div class="dash-card card-purple" onclick="showSection('students')">
+            <div class="dash-card-icon"><i class="fas fa-user-graduate"></i></div>
+            <div class="dash-card-info">
+                <h3 id="totalStudents">0</h3>
+                <p>विद्यार्थी</p>
+            </div>
         </div>
-        <div class="card orange">
-            <h3>⚠️ मुदत संपलेली</h3>
-            <p id="overdueBooks">0</p>
+        <div class="dash-card card-orange">
+            <div class="dash-card-icon"><i class="fas fa-exclamation-triangle"></i></div>
+            <div class="dash-card-info">
+                <h3 id="overdueBooks">0</h3>
+                <p>मुदत संपलेली</p>
+            </div>
         </div>
-        <div class="card teal">
-            <h3>📅 आजचे व्यवहार</h3>
-            <p id="todayTransactions">0</p>
+        <div class="dash-card card-teal">
+            <div class="dash-card-icon"><i class="fas fa-calendar-day"></i></div>
+            <div class="dash-card-info">
+                <h3 id="todayTransactions">0</h3>
+                <p>आजचे व्यवहार</p>
+            </div>
+        </div>
+        <div class="dash-card card-pink">
+            <div class="dash-card-icon"><i class="fas fa-user-tie"></i></div>
+            <div class="dash-card-info">
+                <h3 id="totalFaculty">0</h3>
+                <p>Faculty</p>
+            </div>
+        </div>
+        <div class="dash-card card-cyan">
+            <div class="dash-card-icon"><i class="fas fa-envelope"></i></div>
+            <div class="dash-card-info">
+                <h3 id="totalMessages">0</h3>
+                <p>संदेश</p>
+            </div>
         </div>
     </div>
-    <h3>📋 अलीकडील व्यवहार</h3>
-    <table id="recentTransactions">
-        <thead>
-            <tr>
-                <th>तारीख/वेळ</th>
-                <th>विद्यार्थी</th>
-                <th>पुस्तक</th>
-                <th>प्रकार</th>
-            </tr>
-        </thead>
-        <tbody></tbody>
-    </table>
+
+    <!-- LIVE ACTIVITY CHART -->
+    <div class="dash-row">
+        <div class="dash-panel wide">
+            <h3><i class="fas fa-clock"></i> अलीकडील व्यवहार</h3>
+            <table id="recentTransactions" class="data-table">
+                <thead>
+                    <tr><th>तारीख/वेळ</th><th>विद्यार्थी</th><th>पुस्तक</th><th>प्रकार</th></tr>
+                </thead>
+                <tbody></tbody>
+            </table>
+        </div>
+        <div class="dash-panel">
+            <h3><i class="fas fa-bullhorn"></i> नवीन सूचना</h3>
+            <div id="dashNotices" class="notice-list"></div>
+        </div>
+    </div>
 </section>
 
+<!-- ===== ADD BOOK ===== -->
 <section id="addBook" class="section">
-    <h2>📖 नवीन पुस्तक नोंदणी</h2>
-    <form id="addBookForm">
-        <div class="form-grid">
+    <div class="section-header">
+        <h2><i class="fas fa-book-medical"></i> नवीन पुस्तक नोंदणी</h2>
+    </div>
+    <form id="addBookForm" class="modern-form">
+        <div class="form-grid-3">
             <div class="form-group">
-                <label>पुस्तक क्रमांक (Accession No.) *</label>
+                <label><i class="fas fa-barcode"></i> Accession No. *</label>
                 <input type="text" id="bookAccNo" required placeholder="उदा. ACC-00001">
             </div>
             <div class="form-group">
-                <label>पुस्तकाचे नाव *</label>
-                <input type="text" id="bookName" required placeholder="पुस्तकाचे नाव लिहा">
+                <label><i class="fas fa-book"></i> पुस्तकाचे नाव *</label>
+                <input type="text" id="bookName" required placeholder="पुस्तकाचे नाव">
             </div>
             <div class="form-group">
-                <label>लेखक *</label>
+                <label><i class="fas fa-user-edit"></i> लेखक *</label>
                 <input type="text" id="bookAuthor" required placeholder="लेखकाचे नाव">
             </div>
             <div class="form-group">
-                <label>प्रकाशक</label>
-                <input type="text" id="bookPublisher" placeholder="प्रकाशकाचे नाव">
+                <label><i class="fas fa-building"></i> प्रकाशक</label>
+                <input type="text" id="bookPublisher" placeholder="प्रकाशक">
             </div>
             <div class="form-group">
-                <label>ISBN</label>
-                <input type="text" id="bookISBN" placeholder="ISBN क्रमांक">
+                <label><i class="fas fa-hashtag"></i> ISBN</label>
+                <input type="text" id="bookISBN" placeholder="ISBN">
             </div>
             <div class="form-group">
-                <label>प्रकाशन वर्ष</label>
+                <label><i class="fas fa-calendar"></i> प्रकाशन वर्ष</label>
                 <input type="number" id="bookYear" placeholder="2024">
             </div>
             <div class="form-group">
-                <label>विषय / Category *</label>
+                <label><i class="fas fa-tags"></i> विषय/Category *</label>
                 <select id="bookCategory">
                     <option value="Ayurveda">आयुर्वेद</option>
                     <option value="Anatomy">शरीररचना (Anatomy)</option>
@@ -113,50 +254,84 @@
                     <option value="Rasashastra">रसशास्त्र</option>
                     <option value="Dravyaguna">द्रव्यगुण</option>
                     <option value="Samhita">संहिता</option>
+                    <option value="Rachana Sharir">रचना शरीर</option>
+                    <option value="Kriya Sharir">क्रिया शरीर</option>
+                    <option value="Swasthavritta">स्वस्थवृत्त</option>
+                    <option value="Prasuti Tantra">प्रसूती तंत्र</option>
+                    <option value="Kaumarbhritya">कौमारभृत्य</option>
+                    <option value="Agadtantra">अगदतंत्र</option>
+                    <option value="Rognidan">रोगनिदान</option>
+                    <option value="Sanskrit">संस्कृत</option>
                     <option value="General">सामान्य</option>
                     <option value="Other">इतर</option>
                 </select>
             </div>
             <div class="form-group">
-                <label>रॅक/शेल्फ क्रमांक</label>
+                <label><i class="fas fa-warehouse"></i> रॅक/शेल्फ</label>
                 <input type="text" id="bookRack" placeholder="उदा. R1-S3">
             </div>
             <div class="form-group">
-                <label>किंमत (₹)</label>
-                <input type="number" id="bookPrice" placeholder="0.00">
+                <label><i class="fas fa-rupee-sign"></i> किंमत (₹)</label>
+                <input type="number" id="bookPrice" placeholder="0">
             </div>
             <div class="form-group">
-                <label>प्रतींची संख्या</label>
+                <label><i class="fas fa-copy"></i> प्रतींची संख्या</label>
                 <input type="number" id="bookCopies" value="1" min="1">
             </div>
+            <div class="form-group">
+                <label><i class="fas fa-language"></i> भाषा</label>
+                <select id="bookLanguage">
+                    <option value="Marathi">मराठी</option>
+                    <option value="Hindi">हिंदी</option>
+                    <option value="English">English</option>
+                    <option value="Sanskrit">संस्कृत</option>
+                    <option value="Other">इतर</option>
+                </select>
+            </div>
+            <div class="form-group">
+                <label><i class="fas fa-edition"></i> Edition</label>
+                <input type="text" id="bookEdition" placeholder="1st, 2nd...">
+            </div>
         </div>
-        <button type="submit" class="btn-primary">✅ पुस्तक नोंदणी करा</button>
+        <button type="submit" class="btn-primary btn-lg">
+            <i class="fas fa-plus-circle"></i> पुस्तक नोंदणी करा
+        </button>
     </form>
-    <br>
-    <h3>📥 Excel/CSV मधून पुस्तके Import करा</h3>
-    <p>15,000 पुस्तके एकदम Import करण्यासाठी Excel फाईल वापरा</p>
-    <input type="file" id="importBooksFile" accept=".xlsx,.xls,.csv">
-    <button onclick="importBooksFromFile()" class="btn-secondary">📥 Import करा</button>
-    <a href="#" onclick="downloadTemplate(); return false;" class="btn-secondary">📄 Template डाउनलोड करा</a>
+
+    <div class="import-section">
+        <h3><i class="fas fa-file-import"></i> Excel/CSV मधून Bulk Import</h3>
+        <p>15,000 पुस्तके एकदम Import करा</p>
+        <div class="import-actions">
+            <input type="file" id="importBooksFile" accept=".xlsx,.xls,.csv" class="file-input">
+            <label for="importBooksFile" class="btn-file"><i class="fas fa-upload"></i> फाईल निवडा</label>
+            <button onclick="importBooksFromFile()" class="btn-success"><i class="fas fa-file-import"></i> Import करा</button>
+            <button onclick="downloadTemplate()" class="btn-outline"><i class="fas fa-download"></i> Template</button>
+        </div>
+    </div>
 </section>
 
+<!-- ===== SEARCH BOOK ===== -->
 <section id="searchBook" class="section">
-    <h2>🔍 पुस्तक शोधा</h2>
-    <div class="search-bar">
-        <input type="text" id="searchInput" placeholder="पुस्तकाचे नाव, लेखक, ISBN, किंवा Accession No. ने शोधा..." oninput="searchBooks()">
+    <div class="section-header">
+        <h2><i class="fas fa-search"></i> पुस्तक शोधा</h2>
+    </div>
+    <div class="search-bar-pro">
+        <div class="search-input-wrap">
+            <i class="fas fa-search"></i>
+            <input type="text" id="searchInput" placeholder="पुस्तकाचे नाव, लेखक, ISBN, किंवा Accession No..." oninput="searchBooks()">
+        </div>
         <select id="searchCategory" onchange="searchBooks()">
             <option value="">सर्व विषय</option>
             <option value="Ayurveda">आयुर्वेद</option>
             <option value="Anatomy">शरीररचना</option>
             <option value="Physiology">शरीरक्रिया</option>
             <option value="Pharmacology">औषधशास्त्र</option>
-            <option value="Pathology">विकृतिशास्त्र</option>
             <option value="Surgery">शल्यतंत्र</option>
             <option value="Medicine">कायचिकित्सा</option>
             <option value="Panchakarma">पंचकर्म</option>
+            <option value="Samhita">संहिता</option>
             <option value="Rasashastra">रसशास्त्र</option>
             <option value="Dravyaguna">द्रव्यगुण</option>
-            <option value="Samhita">संहिता</option>
         </select>
         <select id="searchStatus" onchange="searchBooks()">
             <option value="">सर्व स्थिती</option>
@@ -164,160 +339,533 @@
             <option value="issued">वितरित</option>
         </select>
     </div>
-    <div id="searchResults"></div>
+    <div id="searchResults" class="results-area"></div>
 </section>
 
+<!-- ===== ISSUE/RETURN ===== -->
 <section id="issueReturn" class="section">
-    <h2>🔄 पुस्तक देवाण-घेवाण</h2>
-    <div class="tabs">
-        <button class="tab-btn active" onclick="showTab('issueTab', this)">📤 पुस्तक द्या (Issue)</button>
-        <button class="tab-btn" onclick="showTab('returnTab', this)">📥 पुस्तक परत (Return)</button>
+    <div class="section-header">
+        <h2><i class="fas fa-exchange-alt"></i> पुस्तक देवाण-घेवाण</h2>
     </div>
+    <div class="tabs-pro">
+        <button class="tab-btn active" onclick="showTab('issueTab', this)">
+            <i class="fas fa-arrow-circle-up"></i> पुस्तक द्या (Issue)
+        </button>
+        <button class="tab-btn" onclick="showTab('returnTab', this)">
+            <i class="fas fa-arrow-circle-down"></i> पुस्तक परत (Return)
+        </button>
+        <button class="tab-btn" onclick="showTab('historyTab', this)">
+            <i class="fas fa-history"></i> इतिहास
+        </button>
+    </div>
+
     <div id="issueTab" class="tab-content active">
-        <form id="issueForm">
-            <div class="form-grid">
+        <form id="issueForm" class="modern-form">
+            <div class="form-grid-3">
                 <div class="form-group">
-                    <label>पुस्तक Accession No. / QR स्कॅन *</label>
-                    <input type="text" id="issueBookId" required placeholder="Accession No. टाका किंवा QR स्कॅन करा">
-                    <button type="button" onclick="startQRScan('issueBookId')" class="btn-small">📷 QR स्कॅन</button>
+                    <label><i class="fas fa-barcode"></i> Accession No. / QR *</label>
+                    <div class="input-group">
+                        <input type="text" id="issueBookId" required placeholder="Accession No.">
+                        <button type="button" onclick="startQRScan('issueBookId')" class="btn-icon"><i class="fas fa-camera"></i></button>
+                    </div>
                 </div>
                 <div class="form-group">
-                    <label>विद्यार्थी ID / रोल नंबर *</label>
-                    <input type="text" id="issueStudentId" required placeholder="विद्यार्थी ID टाका">
+                    <label><i class="fas fa-id-card"></i> विद्यार्थी ID *</label>
+                    <input type="text" id="issueStudentId" required placeholder="विद्यार्थी ID">
                 </div>
                 <div class="form-group">
-                    <label>परत करण्याची तारीख *</label>
+                    <label><i class="fas fa-calendar-alt"></i> परत करण्याची तारीख *</label>
                     <input type="date" id="issueDueDate" required>
                 </div>
             </div>
             <div id="issueBookInfo" class="info-box"></div>
             <div id="issueStudentInfo" class="info-box"></div>
-            <button type="submit" class="btn-primary">📤 पुस्तक Issue करा</button>
+            <button type="submit" class="btn-primary btn-lg">
+                <i class="fas fa-arrow-circle-up"></i> पुस्तक Issue करा
+            </button>
         </form>
     </div>
+
     <div id="returnTab" class="tab-content">
-        <form id="returnForm">
+        <form id="returnForm" class="modern-form">
             <div class="form-group">
-                <label>पुस्तक Accession No. / QR स्कॅन *</label>
-                <input type="text" id="returnBookId" required placeholder="Accession No. टाका किंवा QR स्कॅन करा">
-                <button type="button" onclick="startQRScan('returnBookId')" class="btn-small">📷 QR स्कॅन</button>
+                <label><i class="fas fa-barcode"></i> Accession No. / QR *</label>
+                <div class="input-group">
+                    <input type="text" id="returnBookId" required placeholder="Accession No.">
+                    <button type="button" onclick="startQRScan('returnBookId')" class="btn-icon"><i class="fas fa-camera"></i></button>
+                </div>
             </div>
             <div id="returnBookInfo" class="info-box"></div>
-            <button type="submit" class="btn-primary">📥 पुस्तक परत करा</button>
+            <button type="submit" class="btn-primary btn-lg">
+                <i class="fas fa-arrow-circle-down"></i> पुस्तक परत करा
+            </button>
         </form>
+    </div>
+
+    <div id="historyTab" class="tab-content">
+        <div id="transactionHistory"></div>
     </div>
 </section>
 
+<!-- ===== STUDENTS ===== -->
 <section id="students" class="section">
-    <h2>🎓 विद्यार्थी नोंदणी</h2>
-    <form id="addStudentForm">
-        <div class="form-grid">
-            <div class="form-group">
-                <label>रोल नंबर / ID *</label>
-                <input type="text" id="studentId" required>
+    <div class="section-header">
+        <h2><i class="fas fa-user-graduate"></i> विद्यार्थी / Faculty व्यवस्थापन</h2>
+    </div>
+    <div class="tabs-pro">
+        <button class="tab-btn active" onclick="showTab('addStudentTab', this)">
+            <i class="fas fa-user-plus"></i> नोंदणी
+        </button>
+        <button class="tab-btn" onclick="showTab('studentListTab', this)">
+            <i class="fas fa-users"></i> यादी
+        </button>
+        <button class="tab-btn" onclick="showTab('bulkStudentTab', this)">
+            <i class="fas fa-file-upload"></i> Bulk Upload
+        </button>
+    </div>
+
+    <div id="addStudentTab" class="tab-content active">
+        <form id="addStudentForm" class="modern-form">
+            <div class="form-grid-3">
+                <div class="form-group">
+                    <label><i class="fas fa-id-badge"></i> रोल नंबर / ID *</label>
+                    <input type="text" id="studentId" required>
+                </div>
+                <div class="form-group">
+                    <label><i class="fas fa-user"></i> नाव *</label>
+                    <input type="text" id="studentName" required>
+                </div>
+                <div class="form-group">
+                    <label><i class="fas fa-graduation-cap"></i> वर्ग / Year *</label>
+                    <select id="studentYear">
+                        <option value="1st BAMS">1st BAMS</option>
+                        <option value="2nd BAMS">2nd BAMS</option>
+                        <option value="3rd BAMS">3rd BAMS</option>
+                        <option value="Final BAMS">Final BAMS</option>
+                        <option value="Intern">Intern</option>
+                        <option value="Faculty">Faculty (शिक्षक)</option>
+                        <option value="Staff">Staff (कर्मचारी)</option>
+                    </select>
+                </div>
+                <div class="form-group">
+                    <label><i class="fas fa-phone"></i> मोबाइल</label>
+                    <input type="tel" id="studentPhone">
+                </div>
+                <div class="form-group">
+                    <label><i class="fas fa-envelope"></i> ईमेल</label>
+                    <input type="email" id="studentEmail">
+                </div>
+                <div class="form-group">
+                    <label><i class="fas fa-venus-mars"></i> लिंग</label>
+                    <select id="studentGender">
+                        <option value="Male">पुरुष</option>
+                        <option value="Female">स्त्री</option>
+                        <option value="Other">इतर</option>
+                    </select>
+                </div>
+            </div>
+            <button type="submit" class="btn-primary btn-lg">
+                <i class="fas fa-user-plus"></i> नोंदणी करा
+            </button>
+        </form>
+    </div>
+
+    <div id="studentListTab" class="tab-content">
+        <div class="search-bar-pro">
+            <div class="search-input-wrap">
+                <i class="fas fa-search"></i>
+                <input type="text" id="studentSearch" placeholder="विद्यार्थी शोधा..." oninput="searchStudents()">
+            </div>
+            <select id="studentYearFilter" onchange="searchStudents()">
+                <option value="">सर्व वर्ग</option>
+                <option value="1st BAMS">1st BAMS</option>
+                <option value="2nd BAMS">2nd BAMS</option>
+                <option value="3rd BAMS">3rd BAMS</option>
+                <option value="Final BAMS">Final BAMS</option>
+                <option value="Faculty">Faculty</option>
+            </select>
+        </div>
+        <div id="studentList"></div>
+    </div>
+
+    <div id="bulkStudentTab" class="tab-content">
+        <div class="import-section">
+            <h3><i class="fas fa-users-cog"></i> Bulk Student Upload</h3>
+            <p>Excel फाईलमधून सर्व विद्यार्थी एकदम Import करा</p>
+            <input type="file" id="importStudentsFile" accept=".xlsx,.xls,.csv" class="file-input">
+            <label for="importStudentsFile" class="btn-file"><i class="fas fa-upload"></i> फाईल निवडा</label>
+            <button onclick="importStudentsFromFile()" class="btn-success"><i class="fas fa-file-import"></i> Import करा</button>
+            <button onclick="downloadStudentTemplate()" class="btn-outline"><i class="fas fa-download"></i> Student Template</button>
+        </div>
+    </div>
+</section>
+
+<!-- ===== MESSAGING ===== -->
+<section id="messaging" class="section">
+    <div class="section-header">
+        <h2><i class="fas fa-envelope"></i> संदेश व्यवस्थापन (Messaging)</h2>
+    </div>
+    <div class="tabs-pro">
+        <button class="tab-btn active" onclick="showTab('sendMsgTab', this)">
+            <i class="fas fa-paper-plane"></i> संदेश पाठवा
+        </button>
+        <button class="tab-btn" onclick="showTab('inboxTab', this)">
+            <i class="fas fa-inbox"></i> Inbox
+        </button>
+        <button class="tab-btn" onclick="showTab('bulkMsgTab', this)">
+            <i class="fas fa-mail-bulk"></i> Bulk MSG
+        </button>
+    </div>
+
+    <div id="sendMsgTab" class="tab-content active">
+        <form id="sendMsgForm" class="modern-form">
+            <div class="form-grid-2">
+                <div class="form-group">
+                    <label><i class="fas fa-user"></i> कोणाला पाठवायचे *</label>
+                    <select id="msgRecipientType" onchange="updateRecipientList()">
+                        <option value="student">विद्यार्थी</option>
+                        <option value="faculty">Faculty</option>
+                        <option value="all">सर्वांना</option>
+                        <option value="year">विशिष्ट वर्गाला</option>
+                    </select>
+                </div>
+                <div class="form-group">
+                    <label><i class="fas fa-user-check"></i> Recipient</label>
+                    <select id="msgRecipient">
+                        <option value="all">सर्व</option>
+                    </select>
+                </div>
             </div>
             <div class="form-group">
-                <label>विद्यार्थ्याचे नाव *</label>
-                <input type="text" id="studentName" required>
+                <label><i class="fas fa-heading"></i> विषय *</label>
+                <input type="text" id="msgSubject" required placeholder="संदेशाचा विषय">
             </div>
             <div class="form-group">
-                <label>वर्ग / Year *</label>
-                <select id="studentYear">
+                <label><i class="fas fa-comment-dots"></i> संदेश *</label>
+                <textarea id="msgBody" rows="5" required placeholder="संदेश लिहा..."></textarea>
+            </div>
+            <div class="form-group">
+                <label><i class="fas fa-exclamation-circle"></i> प्राधान्य</label>
+                <select id="msgPriority">
+                    <option value="normal">सामान्य</option>
+                    <option value="important">महत्त्वाचे</option>
+                    <option value="urgent">तातडीचे</option>
+                </select>
+            </div>
+            <button type="submit" class="btn-primary btn-lg">
+                <i class="fas fa-paper-plane"></i> संदेश पाठवा
+            </button>
+        </form>
+    </div>
+
+    <div id="inboxTab" class="tab-content">
+        <div id="messageInbox" class="message-list"></div>
+    </div>
+
+    <div id="bulkMsgTab" class="tab-content">
+        <form id="bulkMsgForm" class="modern-form">
+            <div class="form-group">
+                <label><i class="fas fa-users"></i> कोणाला *</label>
+                <select id="bulkMsgTarget">
+                    <option value="all_students">सर्व विद्यार्थी</option>
+                    <option value="all_faculty">सर्व Faculty</option>
                     <option value="1st BAMS">1st BAMS</option>
                     <option value="2nd BAMS">2nd BAMS</option>
                     <option value="3rd BAMS">3rd BAMS</option>
-                    <option value="4th BAMS">Final BAMS</option>
-                    <option value="MD">MD (PG)</option>
-                    <option value="MS">MS (PG)</option>
-                    <option value="Faculty">Faculty</option>
+                    <option value="Final BAMS">Final BAMS</option>
+                    <option value="overdue">मुदत संपलेली पुस्तके असलेले</option>
                 </select>
             </div>
             <div class="form-group">
-                <label>मोबाइल नंबर</label>
-                <input type="tel" id="studentPhone">
+                <label><i class="fas fa-heading"></i> विषय *</label>
+                <input type="text" id="bulkMsgSubject" required placeholder="विषय">
             </div>
             <div class="form-group">
-                <label>ईमेल</label>
-                <input type="email" id="studentEmail">
+                <label><i class="fas fa-comment-dots"></i> संदेश *</label>
+                <textarea id="bulkMsgBody" rows="5" required placeholder="Bulk संदेश लिहा..."></textarea>
+            </div>
+            <button type="button" onclick="sendBulkMessage()" class="btn-primary btn-lg">
+                <i class="fas fa-mail-bulk"></i> Bulk संदेश पाठवा
+            </button>
+        </form>
+        <div id="bulkMsgResult"></div>
+    </div>
+</section>
+
+<!-- ===== FILE SHARE ===== -->
+<section id="fileShare" class="section">
+    <div class="section-header">
+        <h2><i class="fas fa-share-alt"></i> फाईल शेअर</h2>
+    </div>
+    <form id="fileShareForm" class="modern-form">
+        <div class="form-grid-2">
+            <div class="form-group">
+                <label><i class="fas fa-file"></i> फाईल निवडा *</label>
+                <input type="file" id="shareFile" class="file-input" multiple>
+                <label for="shareFile" class="btn-file"><i class="fas fa-upload"></i> फाईल निवडा</label>
+            </div>
+            <div class="form-group">
+                <label><i class="fas fa-users"></i> कोणासाठी</label>
+                <select id="shareTarget">
+                    <option value="all">सर्वांसाठी</option>
+                    <option value="1st BAMS">1st BAMS</option>
+                    <option value="2nd BAMS">2nd BAMS</option>
+                    <option value="3rd BAMS">3rd BAMS</option>
+                    <option value="Final BAMS">Final BAMS</option>
+                    <option value="Faculty">Faculty</option>
+                </select>
             </div>
         </div>
-        <button type="submit" class="btn-primary">✅ विद्यार्थी नोंदणी</button>
+        <div class="form-group">
+            <label><i class="fas fa-info-circle"></i> वर्णन</label>
+            <input type="text" id="shareDescription" placeholder="फाईलचे वर्णन">
+        </div>
+        <button type="submit" class="btn-primary btn-lg">
+            <i class="fas fa-share"></i> शेअर करा
+        </button>
     </form>
-    <br>
-    <input type="text" id="studentSearch" placeholder="विद्यार्थी शोधा..." oninput="searchStudents()">
-    <div id="studentList"></div>
+    <h3 style="margin-top:20px;"><i class="fas fa-folder-open"></i> शेअर केलेल्या फाईल्स</h3>
+    <div id="sharedFilesList" class="file-list"></div>
 </section>
 
-<section id="qrSection" class="section">
-    <h2>📱 QR कोड जनरेट करा</h2>
-    <div class="form-grid">
-        <div class="form-group">
-            <label>पुस्तक Accession No.</label>
-            <input type="text" id="qrBookId" placeholder="ACC-00001">
-            <button onclick="generateSingleQR()" class="btn-primary">📱 QR तयार करा</button>
+<!-- ===== NOTIFICATIONS/NOTICES ===== -->
+<section id="notifications" class="section">
+    <div class="section-header">
+        <h2><i class="fas fa-bell"></i> सूचना / नोटीस बोर्ड</h2>
+    </div>
+    <form id="addNoticeForm" class="modern-form">
+        <div class="form-grid-2">
+            <div class="form-group">
+                <label><i class="fas fa-heading"></i> सूचना शीर्षक *</label>
+                <input type="text" id="noticeTitle" required placeholder="सूचनेचे शीर्षक">
+            </div>
+            <div class="form-group">
+                <label><i class="fas fa-tag"></i> प्रकार</label>
+                <select id="noticeType">
+                    <option value="general">सामान्य</option>
+                    <option value="important">महत्त्वाचे</option>
+                    <option value="urgent">तातडीचे</option>
+                    <option value="event">कार्यक्रम</option>
+                    <option value="holiday">सुट्टी</option>
+                    <option value="exam">परीक्षा</option>
+                    <option value="library">लायब्ररी</option>
+                </select>
+            </div>
         </div>
         <div class="form-group">
-            <label>बॅच QR (सर्व पुस्तकांसाठी)</label>
-            <button onclick="generateBatchQR()" class="btn-secondary">📱 सर्व QR तयार करा</button>
-            <button onclick="printQRBatch()" class="btn-secondary">🖨️ थर्मल प्रिंट (Batch)</button>
+            <label><i class="fas fa-align-left"></i> सूचना तपशील *</label>
+            <textarea id="noticeBody" rows="4" required placeholder="सूचनेचा तपशील लिहा..."></textarea>
+        </div>
+        <div class="form-group">
+            <label><i class="fas fa-users"></i> कोणासाठी</label>
+            <select id="noticeFor">
+                <option value="all">सर्वांसाठी</option>
+                <option value="students">फक्त विद्यार्थी</option>
+                <option value="faculty">फक्त Faculty</option>
+                <option value="1st BAMS">1st BAMS</option>
+                <option value="2nd BAMS">2nd BAMS</option>
+                <option value="3rd BAMS">3rd BAMS</option>
+                <option value="Final BAMS">Final BAMS</option>
+            </select>
+        </div>
+        <button type="submit" class="btn-primary btn-lg">
+            <i class="fas fa-bullhorn"></i> सूचना प्रकाशित करा
+        </button>
+    </form>
+    <h3 style="margin-top:20px;"><i class="fas fa-list"></i> सर्व सूचना</h3>
+    <div id="noticeBoard" class="notice-board"></div>
+</section>
+
+<!-- ===== QR CODE ===== -->
+<section id="qrSection" class="section">
+    <div class="section-header">
+        <h2><i class="fas fa-qrcode"></i> QR कोड जनरेटर</h2>
+    </div>
+    <div class="form-grid-2">
+        <div class="form-group">
+            <label><i class="fas fa-barcode"></i> Accession No.</label>
+            <input type="text" id="qrBookId" placeholder="ACC-00001">
+            <button onclick="generateSingleQR()" class="btn-primary" style="margin-top:10px;">
+                <i class="fas fa-qrcode"></i> QR तयार करा
+            </button>
+        </div>
+        <div class="form-group">
+            <label><i class="fas fa-layer-group"></i> Batch QR</label>
+            <button onclick="generateBatchQR()" class="btn-success" style="margin-top:10px;">
+                <i class="fas fa-qrcode"></i> सर्व QR तयार करा
+            </button>
+            <button onclick="printQRBatch()" class="btn-outline" style="margin-top:5px;">
+                <i class="fas fa-print"></i> थर्मल प्रिंट
+            </button>
         </div>
     </div>
-    <div id="qrOutput" class="qr-grid"></div>
-    <div class="form-group">
-        <label>QR आकार (थर्मल प्रिंटर साठी)</label>
+    <div class="form-group" style="max-width:300px;">
+        <label>QR आकार</label>
         <select id="qrSize">
-            <option value="100">Small (100x100) - 58mm प्रिंटर</option>
-            <option value="150" selected>Medium (150x150) - 80mm प्रिंटर</option>
-            <option value="200">Large (200x200)</option>
+            <option value="100">Small (58mm प्रिंटर)</option>
+            <option value="150" selected>Medium (80mm प्रिंटर)</option>
+            <option value="200">Large</option>
         </select>
     </div>
+    <div id="qrOutput" class="qr-grid"></div>
 </section>
 
+<!-- ===== REPORTS ===== -->
 <section id="reports" class="section">
-    <h2>📊 रिपोर्ट</h2>
-    <div class="form-grid">
-        <button onclick="generateReport('daily')" class="btn-secondary">📅 आजचा रिपोर्ट</button>
-        <button onclick="generateReport('overdue')" class="btn-secondary">⚠️ मुदत संपलेली पुस्तके</button>
-        <button onclick="generateReport('popular')" class="btn-secondary">⭐ लोकप्रिय पुस्तके</button>
-        <button onclick="generateReport('student')" class="btn-secondary">🎓 विद्यार्थी रिपोर्ट</button>
-        <button onclick="exportToExcel()" class="btn-secondary">📥 Excel Export</button>
+    <div class="section-header">
+        <h2><i class="fas fa-chart-bar"></i> रिपोर्ट आणि Analytics</h2>
     </div>
-    <div id="reportOutput"></div>
+    <div class="report-buttons">
+        <button onclick="generateReport('daily')" class="report-btn"><i class="fas fa-calendar-day"></i> आजचा रिपोर्ट</button>
+        <button onclick="generateReport('overdue')" class="report-btn btn-warning"><i class="fas fa-exclamation-triangle"></i> मुदत संपलेली</button>
+        <button onclick="generateReport('popular')" class="report-btn"><i class="fas fa-star"></i> लोकप्रिय पुस्तके</button>
+        <button onclick="generateReport('student')" class="report-btn"><i class="fas fa-user-graduate"></i> विद्यार्थी रिपोर्ट</button>
+        <button onclick="generateReport('category')" class="report-btn"><i class="fas fa-tags"></i> विषयवार रिपोर्ट</button>
+        <button onclick="generateReport('monthly')" class="report-btn"><i class="fas fa-calendar-alt"></i> मासिक रिपोर्ट</button>
+        <button onclick="exportToExcel()" class="report-btn btn-success"><i class="fas fa-file-excel"></i> Excel Export</button>
+    </div>
+    <div id="reportOutput" class="report-area"></div>
 </section>
 
+<!-- ===== DATABASE ===== -->
+<section id="database" class="section">
+    <div class="section-header">
+        <h2><i class="fas fa-database"></i> डेटाबेस व्यवस्थापन</h2>
+    </div>
+    <div class="db-stats" id="dbStats"></div>
+    <div class="report-buttons">
+        <button onclick="showAllBooks()" class="report-btn"><i class="fas fa-book"></i> सर्व पुस्तके</button>
+        <button onclick="showAllStudentsDB()" class="report-btn"><i class="fas fa-users"></i> सर्व विद्यार्थी</button>
+        <button onclick="showAllTransactionsDB()" class="report-btn"><i class="fas fa-history"></i> सर्व व्यवहार</button>
+        <button onclick="showAllMessages()" class="report-btn"><i class="fas fa-envelope"></i> सर्व संदेश</button>
+        <button onclick="clearOldTransactions()" class="report-btn btn-warning"><i class="fas fa-broom"></i> जुने व्यवहार हटवा</button>
+    </div>
+    <div id="dbOutput" class="report-area"></div>
+</section>
+
+<!-- ===== BACKUP ===== -->
 <section id="backupSection" class="section">
-    <h2>💾 बॅकअप आणि रिस्टोर</h2>
-    <div class="backup-cards">
-        <div class="card blue">
-            <h3>📥 बॅकअप तयार करा</h3>
-            <p>संपूर्ण डेटाची JSON फाईल डाउनलोड करा</p>
-            <button onclick="createBackup()" class="btn-primary">💾 बॅकअप डाउनलोड</button>
+    <div class="section-header">
+        <h2><i class="fas fa-cloud-download-alt"></i> बॅकअप आणि रिस्टोर</h2>
+    </div>
+    <div class="backup-grid">
+        <div class="backup-card card-blue">
+            <i class="fas fa-download fa-3x"></i>
+            <h3>बॅकअप तयार करा</h3>
+            <p>संपूर्ण डेटाची JSON फाईल</p>
+            <button onclick="createBackup()" class="btn-white"><i class="fas fa-download"></i> बॅकअप डाउनलोड</button>
         </div>
-        <div class="card green">
-            <h3>📤 डेटा रिस्टोर करा</h3>
-            <p>JSON बॅकअप फाईल अपलोड करून डेटा परत आणा</p>
-            <input type="file" id="restoreFile" accept=".json">
-            <button onclick="restoreBackup()" class="btn-primary">📤 रिस्टोर करा</button>
+        <div class="backup-card card-green">
+            <i class="fas fa-upload fa-3x"></i>
+            <h3>डेटा रिस्टोर करा</h3>
+            <p>JSON बॅकअप फाईल अपलोड करा</p>
+            <input type="file" id="restoreFile" accept=".json" class="file-input">
+            <label for="restoreFile" class="btn-white"><i class="fas fa-upload"></i> फाईल निवडा</label>
+            <button onclick="restoreBackup()" class="btn-white" style="margin-top:5px;"><i class="fas fa-undo"></i> रिस्टोर करा</button>
         </div>
-        <div class="card orange">
-            <h3>☁️ Auto Backup</h3>
+        <div class="backup-card card-orange">
+            <i class="fas fa-clock fa-3x"></i>
+            <h3>Auto Backup</h3>
             <p>दररोज स्वयंचलित बॅकअप</p>
-            <label><input type="checkbox" id="autoBackup" onchange="toggleAutoBackup()"> Auto Backup चालू करा</label>
-            <p id="lastBackupTime">शेवटचा बॅकअप: कधीच नाही</p>
+            <label class="toggle-label">
+                <input type="checkbox" id="autoBackup" onchange="toggleAutoBackup()">
+                <span class="toggle-switch"></span> Auto Backup
+            </label>
+            <p id="lastBackupTime" style="font-size:0.8em;margin-top:10px;">शेवटचा बॅकअप: कधीच नाही</p>
+        </div>
+        <div class="backup-card card-purple">
+            <i class="fas fa-file-excel fa-3x"></i>
+            <h3>Excel Export</h3>
+            <p>सर्व डेटा Excel मध्ये Export करा</p>
+            <button onclick="exportFullExcel()" class="btn-white"><i class="fas fa-file-excel"></i> Full Excel Export</button>
         </div>
     </div>
 </section>
 
+<!-- ===== SETTINGS ===== -->
+<section id="settings" class="section">
+    <div class="section-header">
+        <h2><i class="fas fa-cog"></i> सेटिंग्ज</h2>
+    </div>
+    <div class="settings-grid">
+        <div class="settings-card">
+            <h3><i class="fas fa-university"></i> कॉलेज माहिती</h3>
+            <div class="form-group">
+                <label>कॉलेजचे नाव</label>
+                <input type="text" id="settCollegeName" value="धन्वंतरी आयुर्वेद मेडिकल कॉलेज, उदगीर">
+            </div>
+            <div class="form-group">
+                <label>कॉलेज Logo (Image URL किंवा Upload)</label>
+                <input type="file" id="settLogoFile" accept="image/*" onchange="previewLogo(this)">
+                <input type="text" id="settLogoURL" placeholder="किंवा Image URL टाका">
+                <div id="logoPreview" style="margin-top:10px;"></div>
+            </div>
+            <div class="form-group">
+                <label>लायब्ररी वेळ</label>
+                <input type="text" id="settLibraryTime" value="सकाळी 8:00 ते संध्याकाळी 6:00">
+            </div>
+            <div class="form-group">
+                <label>Ticker / स्क्रॉलिंग सूचना</label>
+                <textarea id="settTicker" rows="2">📢 धन्वंतरी आयुर्वेद मेडिकल कॉलेज लायब्ररी मध्ये आपले स्वागत आहे!</textarea>
+            </div>
+            <button onclick="saveSettings()" class="btn-primary"><i class="fas fa-save"></i> सेव्ह करा</button>
+        </div>
+
+        <div class="settings-card">
+            <h3><i class="fas fa-lock"></i> Admin Password बदला</h3>
+            <div class="form-group">
+                <label>जुना Password</label>
+                <input type="password" id="settOldPass">
+            </div>
+            <div class="form-group">
+                <label>नवीन Password</label>
+                <input type="password" id="settNewPass">
+            </div>
+            <div class="form-group">
+                <label>नवीन Password पुन्हा</label>
+                <input type="password" id="settConfirmPass">
+            </div>
+            <button onclick="changePassword()" class="btn-primary"><i class="fas fa-key"></i> Password बदला</button>
+        </div>
+
+        <div class="settings-card">
+            <h3><i class="fas fa-palette"></i> Theme</h3>
+            <div class="theme-options">
+                <button onclick="setTheme('light')" class="theme-btn light-theme">Light</button>
+                <button onclick="setTheme('dark')" class="theme-btn dark-theme">Dark</button>
+                <button onclick="setTheme('blue')" class="theme-btn blue-theme">Blue</button>
+            </div>
+        </div>
+
+        <div class="settings-card">
+            <h3><i class="fas fa-info-circle"></i> System Info</h3>
+            <div id="systemInfo"></div>
+            <div class="dev-credit">
+                <p><strong>Designed & Developed by</strong></p>
+                <p class="dev-name">Dr. Jadhav V.R.</p>
+                <p><i class="fas fa-phone"></i> 9518356305</p>
+                <p class="version">Version 2.0 | 2026</p>
+            </div>
+        </div>
+    </div>
+</section>
+
+</main><!-- /content -->
+</div><!-- /mainApp -->
+
+<!-- QR SCANNER MODAL -->
 <div id="qrScannerModal" class="modal" style="display:none;">
     <div class="modal-content">
-        <h3>📷 QR कोड स्कॅन करा</h3>
+        <h3><i class="fas fa-camera"></i> QR कोड स्कॅन करा</h3>
         <video id="qrVideo" width="300" height="300"></video>
-        <button onclick="closeQRScanner()" class="btn-secondary">❌ बंद करा</button>
+        <button onclick="closeQRScanner()" class="btn-outline"><i class="fas fa-times"></i> बंद करा</button>
     </div>
 </div>
 
+<!-- NOTIFICATION TOAST -->
 <div id="notification" class="notification"></div>
 
+<!-- SCRIPTS -->
 <script src="db.js"></script>
 <script src="qr.js"></script>
 <script src="backup.js"></script>
